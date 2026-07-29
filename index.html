@@ -13,13 +13,21 @@
     --paper:#FAF9F5;
     --paper-dim:#F1EFE7;
     --ink:#14181F;
+    --ink-soft:#1D232C;
     --graphite:#565F6E;
     --hairline:#D8D4C8;
+    --hairline-dark:rgba(255,255,255,.12);
     --amber:#FF6A00;
     --amber-dim:#FFE3CC;
+    --amber-deep:#C74E00;
     --circuit:#1F5FA8;
     --ok:#1B7A4B;
-    --radius:2px;
+    --radius:10px;
+    --radius-sm:6px;
+    --shadow-sm:0 1px 2px rgba(20,24,31,.06), 0 1px 1px rgba(20,24,31,.04);
+    --shadow-md:0 6px 16px -4px rgba(20,24,31,.14), 0 2px 6px -2px rgba(20,24,31,.08);
+    --shadow-lg:0 20px 50px -12px rgba(20,24,31,.35);
+    --shadow-amber:0 8px 24px -6px rgba(255,106,0,.35);
   }
 
   *{box-sizing:border-box;}
@@ -32,8 +40,10 @@
     font-size:16px;
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  ::selection{ background:var(--amber); color:var(--paper); }
+  html{ overflow-x:hidden; }
+  ::selection{ background:var(--amber); color:#fff; }
 
   a{ color:var(--circuit); text-decoration:none; }
   a:hover{ text-decoration:underline; }
@@ -43,113 +53,153 @@
 
   .mono{ font-family:'IBM Plex Mono', monospace; }
 
-  /* ---------- registration marks (signature flourish) ---------- */
-  .reg{
-    position:fixed; width:14px; height:14px; z-index:40; pointer-events:none;
-    opacity:.45;
+  /* ---------- sticky side navigation (signature element) ---------- */
+  .side-nav{
+    position:fixed; left:26px; top:50%; transform:translateY(-50%);
+    z-index:50;
+    display:flex; flex-direction:column; gap:2px;
+    background:rgba(20,24,31,.92);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--hairline-dark);
+    border-radius:10px;
+    padding:10px;
+    box-shadow:var(--shadow-lg);
   }
-  .reg::before,.reg::after{ content:""; position:absolute; background:var(--ink); }
-  .reg::before{ left:6px; top:0; width:2px; height:14px; }
-  .reg::after{ left:0; top:6px; width:14px; height:2px; }
-  .reg.tl{ top:14px; left:14px; }
-  .reg.tr{ top:14px; right:14px; }
-  .reg.bl{ bottom:14px; left:14px; }
-  .reg.br{ bottom:14px; right:14px; }
-  @media (max-width:700px){ .reg{ display:none; } }
-
-  /* ---------- edge label ---------- */
-  .edge-label{
-    position:fixed; left:0; top:50%; transform:translateY(-50%) rotate(180deg);
-    writing-mode:vertical-rl;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px; letter-spacing:.18em;
-    color:var(--graphite);
-    padding:10px 6px;
-    z-index:30;
-    opacity:.7;
+  .side-nav a{
+    display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; font-weight:500;
+    letter-spacing:.03em; color:#C9CDD6;
+    padding:9px 14px 9px 10px; border-radius:7px;
+    white-space:nowrap;
+    transition:background .15s ease, color .15s ease;
   }
-  @media (max-width:900px){ .edge-label{ display:none; } }
+  .side-nav a:hover, .side-nav a:focus-visible{
+    background:var(--amber); color:#fff; text-decoration:none;
+  }
+  .side-nav a:hover .sn-num, .side-nav a:focus-visible .sn-num{ color:#fff; }
+  .sn-num{ color:var(--amber); font-weight:700; font-size:11px; }
+  @media (max-width:1360px){ .side-nav{ display:none; } }
 
   .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
   @media (max-width:600px){ .wrap{ padding:0 18px; } }
 
-  /* ---------- header / datasheet title block ---------- */
+  /* ---------- header / dark hero band ---------- */
   header.sheet{
-    border-bottom:1px solid var(--ink);
-    padding:22px 0 0;
+    position:relative;
+    background:
+      radial-gradient(ellipse 700px 420px at 88% -10%, rgba(255,106,0,.20), transparent 60%),
+      radial-gradient(ellipse 500px 400px at 10% 110%, rgba(31,95,168,.18), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+    color:var(--paper);
+    padding-top:22px;
+    overflow:hidden;
+    box-shadow:var(--shadow-lg);
   }
+  header.sheet::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--hairline-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline-dark) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.15) 75%, transparent);
+    pointer-events:none;
+  }
+  header.sheet .wrap{ position:relative; z-index:2; }
+
   .titlebar{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    padding-bottom:14px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap:10px 20px;
+    padding-bottom:14px; border-bottom:1px solid var(--hairline-dark);
   }
   .brand{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:.14em; color:var(--graphite);
+    font-size:12px; letter-spacing:.16em; color:#B9BFCC; font-weight:600;
   }
   nav.top{
-    display:flex; gap:22px; font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px; letter-spacing:.04em;
+    display:flex; gap:22px; flex-wrap:wrap; font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:.03em; font-weight:500;
   }
-  nav.top a{ color:var(--ink); }
+  nav.top a{ color:#D6D9E0; }
   nav.top a:hover{ color:var(--amber); text-decoration:none; }
-  @media (max-width:700px){ nav.top{ display:none; } }
+  @media (max-width:640px){ nav.top{ display:none; } }
 
   .titleblock{
     display:grid; grid-template-columns:1.5fr 1fr; gap:32px;
-    padding:26px 0 30px; border-top:1px solid var(--hairline);
+    padding:34px 0 44px; align-items:start;
   }
   @media (max-width:800px){ .titleblock{ grid-template-columns:1fr; } }
 
-  .partno{
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    color:var(--amber); letter-spacing:.12em; margin-bottom:10px; font-weight:600;
-  }
   h1.name{
     font-family:'IBM Plex Sans Condensed', sans-serif;
     font-weight:700;
-    font-size:clamp(2.4rem, 5.5vw, 4rem);
-    line-height:1.02;
-    margin:0 0 6px;
+    font-size:clamp(1.9rem, 3.6vw, 2.9rem);
+    line-height:1.08;
+    margin:14px 0 10px;
     letter-spacing:-.01em;
+    color:#fff;
   }
   .role{
     font-family:'IBM Plex Mono', monospace;
-    font-size:15px; color:var(--graphite); margin:0 0 18px;
+    font-size:15px; color:var(--amber-dim); margin:0 0 20px; font-weight:500;
   }
-  .desc{ max-width:52ch; color:var(--ink); font-size:15px; }
+  .desc{ max-width:54ch; color:#D6D9E0; font-size:15.5px; }
 
   .status-card{
-    border:1px solid var(--ink);
-    padding:16px 18px;
+    border:1px solid var(--hairline-dark);
+    border-radius:var(--radius);
+    padding:20px 22px;
     align-self:start;
-    background:var(--paper-dim);
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(6px);
+    box-shadow:var(--shadow-lg);
   }
-  .status-row{ display:flex; align-items:center; gap:9px; margin-bottom:10px; }
+  .status-row{ display:flex; align-items:center; gap:9px; margin-bottom:14px; padding-bottom:14px; border-bottom:1px dashed var(--hairline-dark); }
   .dot{
-    width:8px; height:8px; border-radius:50%; background:var(--ok);
-    box-shadow:0 0 0 3px rgba(27,122,75,.15);
+    width:8px; height:8px; border-radius:50%; background:#3DDC84;
+    box-shadow:0 0 0 3px rgba(61,220,132,.2);
     animation:pulse 2.2s infinite;
     flex:none;
   }
   @keyframes pulse{
-    0%,100%{ box-shadow:0 0 0 3px rgba(27,122,75,.15); }
-    50%{ box-shadow:0 0 0 6px rgba(27,122,75,.05); }
+    0%,100%{ box-shadow:0 0 0 3px rgba(61,220,132,.2); }
+    50%{ box-shadow:0 0 0 7px rgba(61,220,132,.06); }
   }
   @media (prefers-reduced-motion:reduce){ .dot{ animation:none; } }
-  .status-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.06em; }
-  .kv{ display:flex; justify-content:space-between; font-size:13px; padding:5px 0; border-top:1px dashed var(--hairline); gap:12px; }
-  .kv:first-of-type{ border-top:none; }
-  .kv dt{ color:var(--graphite); font-family:'IBM Plex Mono',monospace; font-size:11.5px; }
-  .kv dd{ margin:0; text-align:right; }
-  .cta-row{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  .status-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.06em; color:#fff; }
+  .kv{ display:flex; justify-content:space-between; font-size:13px; padding:7px 0; gap:12px; }
+  .kv dt{ color:#8B93A3; font-family:'IBM Plex Mono',monospace; font-size:11.5px; }
+  .kv dd{ margin:0; text-align:right; color:#EDEEF2; }
+  .kv dd a{ color:var(--amber-dim); }
+  .cta-row{ display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
   .btn{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.04em;
-    padding:9px 14px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
-    display:inline-block; cursor:pointer;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.04em; font-weight:500;
+    padding:11px 18px; border:1px solid var(--amber); background:var(--amber); color:#fff;
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; border-radius:var(--radius);
+    box-shadow:var(--shadow-amber);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
   }
-  .btn:hover{ background:var(--amber); border-color:var(--amber); text-decoration:none; color:var(--ink); }
-  .btn.ghost{ background:transparent; color:var(--ink); }
-  .btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+  .btn:hover{ background:var(--amber-deep); border-color:var(--amber-deep); text-decoration:none; color:#fff; transform:translateY(-2px); box-shadow:0 12px 28px -6px rgba(255,106,0,.45); }
+  .btn.ghost{ background:transparent; color:#fff; border-color:var(--hairline-dark); box-shadow:none; }
+  .btn.ghost:hover{ background:rgba(255,255,255,.08); border-color:#fff; color:#fff; transform:translateY(-2px); box-shadow:var(--shadow-md); }
+
+  .filmstrip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+    margin-bottom:-46px; position:relative; z-index:3;
+    transform:translateY(30px);
+  }
+  @media (max-width:750px){ .filmstrip{ grid-template-columns:repeat(2,1fr); } }
+  .film-frame{
+    aspect-ratio:16/10; overflow:hidden; border-radius:var(--radius);
+    border:1px solid var(--hairline-dark);
+    box-shadow:var(--shadow-lg);
+  }
+  .film-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(35%) contrast(1.08) brightness(.92) sepia(8%) saturate(1.3);
+    transition:filter .35s ease, transform .5s ease;
+  }
+  .film-frame:hover img{ filter:grayscale(0%) contrast(1.05) brightness(1); transform:scale(1.06); }
 
   /* ---------- section chrome ---------- */
   section{ padding:64px 0; border-bottom:1px solid var(--hairline); }
@@ -174,45 +224,78 @@
   .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:44px; }
   @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
   .about-grid p{ font-size:16px; }
-  .edu-card{ border-left:3px solid var(--amber); padding:4px 0 4px 16px; margin-bottom:22px; }
+  .edu-card{
+    background:#fff; border:1px solid var(--hairline); border-radius:var(--radius);
+    padding:20px 22px; margin-bottom:18px; box-shadow:var(--shadow-sm);
+    position:relative; padding-left:64px;
+    transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .edu-card:hover{ box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  .edu-icon{
+    position:absolute; left:20px; top:20px;
+    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    background:var(--amber-dim); border-radius:8px; color:var(--amber-deep);
+  }
+  .edu-icon svg{ width:18px; height:18px; }
   .edu-card h3{ margin:0 0 2px; font-size:16px; font-family:'IBM Plex Sans', sans-serif; font-weight:600; }
   .edu-meta{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--graphite); margin-bottom:6px; }
   .edu-courses{ font-size:13px; color:var(--graphite); }
 
   /* ---------- specifications table ---------- */
-  .spec-table{ width:100%; border-collapse:collapse; }
-  .spec-table tr{ border-top:1px solid var(--hairline); }
-  .spec-table tr:first-child{ border-top:1px solid var(--ink); }
-  .spec-table tr:last-child{ border-bottom:1px solid var(--ink); }
-  .spec-table td{ padding:13px 10px; vertical-align:top; font-size:14.5px; }
-  .spec-table td.param{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
-    color:var(--graphite); width:190px; white-space:nowrap; letter-spacing:.03em;
-    text-transform:uppercase;
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px;
   }
-  @media (max-width:650px){
-    .spec-table td.param{ white-space:normal; width:120px; font-size:11px; }
+  .skill-card{
+    background:#fff; border:1px solid var(--hairline); border-radius:var(--radius);
+    padding:22px; box-shadow:var(--shadow-sm);
+    transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .skill-card:hover{ box-shadow:var(--shadow-md); transform:translateY(-3px); border-color:var(--amber); }
+  .skill-icon{
+    width:42px; height:42px; border-radius:10px;
+    background:linear-gradient(135deg, var(--amber-dim), #fff);
+    color:var(--amber-deep);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+  }
+  .skill-icon svg{ width:22px; height:22px; }
+  .skill-card h3{ margin:0 0 12px; font-size:16px; font-family:'IBM Plex Sans Condensed',sans-serif; font-weight:700; }
+  .skill-pills{ display:flex; flex-wrap:wrap; gap:7px; }
+  .skill-pills span{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.02em;
+    background:var(--paper-dim); border:1px solid var(--hairline); color:var(--ink);
+    padding:5px 10px; border-radius:20px;
   }
 
   /* ---------- project filter chips ---------- */
-  .filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:30px; }
+  .filters{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:30px; }
   .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.03em;
-    border:1px solid var(--ink); background:transparent; color:var(--ink);
-    padding:7px 12px; cursor:pointer; border-radius:var(--radius);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.03em; font-weight:500;
+    border:1px solid var(--hairline); background:var(--paper); color:var(--ink);
+    padding:8px 15px; cursor:pointer; border-radius:20px;
+    box-shadow:var(--shadow-sm);
+    transition:all .18s ease;
   }
-  .tag.active{ background:var(--ink); color:var(--paper); }
-  .tag:hover{ background:var(--amber); border-color:var(--amber); color:var(--ink); }
+  .tag.active{ background:var(--ink); border-color:var(--ink); color:var(--paper); box-shadow:var(--shadow-md); }
+  .tag:hover{ background:var(--amber); border-color:var(--amber); color:#fff; transform:translateY(-1px); box-shadow:var(--shadow-amber); }
 
   /* ---------- project cards (application notes) ---------- */
-  .projects{ display:flex; flex-direction:column; gap:2px; }
+  .projects{ display:flex; flex-direction:column; gap:18px; }
   .card{
     border:1px solid var(--hairline);
+    border-top:3px solid var(--graphite);
     background:var(--paper);
     display:grid; grid-template-columns:220px 1fr;
-    transition:border-color .2s ease;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);
+    transition:border-color .2s ease, box-shadow .25s ease, transform .25s ease;
   }
-  .card:hover{ border-color:var(--ink); }
+  .card:hover{ border-color:var(--ink); box-shadow:var(--shadow-md); transform:translateY(-3px); }
+  .card[data-cats*="perception"]{ border-top-color:var(--circuit); }
+  .card[data-cats*="slam"]{ border-top-color:var(--amber); }
+  .card[data-cats*="manipulation"]{ border-top-color:var(--circuit); }
+  .card[data-cats*="hri"]{ border-top-color:var(--ok); }
+  .card[data-cats*="embedded"]{ border-top-color:var(--graphite); }
   .card.no-photo{ grid-template-columns:1fr; }
   @media (max-width:750px){ .card{ grid-template-columns:1fr; } }
 
@@ -221,8 +304,8 @@
     border-right:1px solid var(--hairline);
   }
   @media (max-width:750px){ .card-media{ border-right:none; border-bottom:1px solid var(--hairline); } }
-  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(15%); transition:filter .3s ease, transform .4s ease; }
-  .card:hover .card-media img{ filter:grayscale(0%); transform:scale(1.03); }
+  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(20%) contrast(1.05); transition:filter .3s ease, transform .4s ease; }
+  .card:hover .card-media img{ filter:grayscale(0%); transform:scale(1.05); }
   .card-media .fig{
     position:absolute; bottom:0; left:0; right:0; background:rgba(20,24,31,.82); color:var(--paper);
     font-family:'IBM Plex Mono', monospace; font-size:10px; padding:4px 8px; letter-spacing:.03em;
@@ -244,10 +327,10 @@
   .stack-line{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--graphite); margin-bottom:14px; }
   .stack-line b{ color:var(--ink); font-weight:600; }
 
-  .results{ display:flex; flex-wrap:wrap; gap:22px; margin-bottom:14px; }
-  .result{ min-width:80px; }
-  .result .num{ font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:1.3rem; color:var(--amber); display:block; line-height:1; }
-  .result .lbl{ font-size:10.5px; color:var(--graphite); text-transform:uppercase; letter-spacing:.03em; }
+  .results{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+  .result{ min-width:88px; background:var(--paper-dim); border:1px solid var(--hairline); border-radius:var(--radius); padding:8px 12px; }
+  .result .num{ font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:1.25rem; color:var(--amber-deep); display:block; line-height:1.1; }
+  .result .lbl{ font-size:10px; color:var(--graphite); text-transform:uppercase; letter-spacing:.03em; }
 
   .card-tags{ display:flex; flex-wrap:wrap; gap:6px; }
   .pill{
@@ -257,74 +340,106 @@
   .card-links{ margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; display:flex; gap:16px; }
 
   /* ---------- experience timeline ---------- */
-  .timeline{ position:relative; padding-left:28px; }
-  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--hairline); }
-  .tl-item{ position:relative; padding-bottom:34px; }
-  .tl-item:last-child{ padding-bottom:0; }
-  .tl-item::before{
-    content:""; position:absolute; left:-28px; top:4px; width:9px; height:9px;
-    background:var(--paper); border:2px solid var(--amber); border-radius:50%;
+  .timeline{ display:flex; flex-direction:column; gap:18px; }
+  .tl-item{
+    position:relative; background:#fff; border:1px solid var(--hairline);
+    border-left:4px solid var(--amber); border-radius:var(--radius);
+    padding:24px 26px; box-shadow:var(--shadow-sm);
+    transition:box-shadow .2s ease, transform .2s ease;
   }
-  .tl-date{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--amber); font-weight:600; letter-spacing:.03em; }
-  .tl-role{ font-weight:700; font-size:1.05rem; margin:3px 0 1px; font-family:'IBM Plex Sans Condensed',sans-serif; }
-  .tl-org{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--graphite); margin-bottom:8px; }
+  .tl-item:hover{ box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  .tl-date{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber-deep);
+    font-weight:700; letter-spacing:.04em; background:var(--amber-dim); padding:4px 10px; border-radius:20px; margin-bottom:10px;
+  }
+  .tl-role{ font-weight:700; font-size:1.15rem; margin:0 0 3px; font-family:'IBM Plex Sans Condensed',sans-serif; }
+  .tl-org{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--graphite); margin-bottom:12px; }
   .tl-item ul{ margin:0; padding-left:18px; font-size:14px; }
-  .tl-item li{ margin-bottom:5px; }
+  .tl-item li{ margin-bottom:6px; }
 
   /* ---------- publication ---------- */
   .pub-box{
-    border:1px solid var(--ink); background:var(--paper-dim); padding:22px 24px;
-    display:flex; justify-content:space-between; gap:20px; align-items:center; flex-wrap:wrap;
+    border:1px solid var(--hairline); background:#fff; padding:26px 28px;
+    display:flex; justify-content:space-between; gap:22px; align-items:center; flex-wrap:wrap;
+    border-radius:var(--radius); box-shadow:var(--shadow-sm);
   }
-  .pub-text{ font-size:14.5px; max-width:60ch; }
+  .pub-icon{
+    width:44px; height:44px; flex:none; border-radius:10px; background:#E7F4EC; color:var(--ok);
+    display:flex; align-items:center; justify-content:center; margin-right:6px;
+  }
+  .pub-icon svg{ width:22px; height:22px; }
+  .pub-row{ display:flex; align-items:flex-start; gap:6px; }
+  .pub-text{ font-size:14.5px; max-width:58ch; }
   .pub-text .doi{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); display:block; margin-top:6px; }
 
-  /* ---------- footer / ordering info ---------- */
-  footer{ padding:56px 0 90px; }
-  .order-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
-  @media (max-width:750px){ .order-grid{ grid-template-columns:1fr; } }
-  .contact-list{ list-style:none; padding:0; margin:0; }
-  .contact-list li{ display:flex; gap:14px; padding:10px 0; border-top:1px dashed var(--hairline); font-size:14.5px; }
-  .contact-list li:first-child{ border-top:none; }
-  .contact-list span.k{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); width:70px; flex:none; padding-top:2px; text-transform:uppercase; letter-spacing:.03em;}
-  .foot-note{ margin-top:26px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); }
-
-  #hire-form{ display:flex; flex-direction:column; gap:10px; }
-  #hire-form input, #hire-form textarea{
-    font-family:'IBM Plex Sans', sans-serif; font-size:14px; padding:11px 12px;
-    border:1px solid var(--ink); background:var(--paper); color:var(--ink);
+  /* ---------- footer / contact ---------- */
+  footer{
+    padding:64px 0 80px;
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+    color:var(--paper);
+    margin-top:0;
   }
+  footer .sec-title{ color:#fff; }
+  footer .sec-rule{ background:var(--hairline-dark); }
+  .order-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+  @media (max-width:750px){ .order-grid{ grid-template-columns:1fr; } }
+  .contact-card, .form-card{
+    background:rgba(255,255,255,.045); border:1px solid var(--hairline-dark); border-radius:var(--radius);
+    padding:26px 28px; backdrop-filter:blur(6px); box-shadow:var(--shadow-lg);
+  }
+  .contact-list{ list-style:none; padding:0; margin:0; }
+  .contact-list li{ display:flex; align-items:center; gap:14px; padding:13px 0; border-top:1px solid var(--hairline-dark); font-size:14.5px; color:#E4E6EB; }
+  .contact-list li:first-child{ border-top:none; }
+  .contact-list .c-icon{
+    width:34px; height:34px; flex:none; border-radius:8px; background:rgba(255,106,0,.12); color:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .contact-list .c-icon svg{ width:17px; height:17px; }
+  .contact-list a{ color:var(--amber-dim); }
+  .foot-note{ margin-top:22px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:#6E7686; }
+
+  #hire-form{ display:flex; flex-direction:column; gap:12px; }
+  #hire-form input, #hire-form textarea{
+    font-family:'IBM Plex Sans', sans-serif; font-size:14px; padding:12px 14px;
+    border:1px solid var(--hairline-dark); background:rgba(255,255,255,.06); color:#fff;
+    border-radius:var(--radius-sm);
+  }
+  #hire-form input::placeholder, #hire-form textarea::placeholder{ color:#7A8190; }
   #hire-form textarea{ resize:vertical; min-height:90px; }
   #hire-form input:focus, #hire-form textarea:focus{ outline:2px solid var(--amber); outline-offset:1px; }
-  .form-note{ font-size:12px; color:var(--graphite); margin-top:4px; }
+  .form-note{ font-size:12px; color:#7A8190; margin-top:4px; }
+  .form-title{ font-family:'IBM Plex Sans Condensed',sans-serif; font-weight:700; font-size:1.05rem; color:#fff; margin:0 0 16px; }
 
 </style>
 </head>
 <body>
 
-<div class="reg tl" aria-hidden="true"></div>
-<div class="reg tr" aria-hidden="true"></div>
-<div class="reg bl" aria-hidden="true"></div>
-<div class="reg br" aria-hidden="true"></div>
-<div class="edge-label" aria-hidden="true">ROBOTICS ENGINEER &nbsp;·&nbsp; REV 2026.07 &nbsp;·&nbsp; BOSTON, MA</div>
+<nav class="side-nav" aria-label="Section navigation">
+  <a href="#about"><span class="sn-num">01</span>About</a>
+  <a href="#specs"><span class="sn-num">02</span>Skills</a>
+  <a href="#projects"><span class="sn-num">03</span>Projects</a>
+  <a href="#experience"><span class="sn-num">04</span>Experience</a>
+  <a href="#publication"><span class="sn-num">05</span>Publication</a>
+  <a href="#contact"><span class="sn-num">06</span>Contact</a>
+</nav>
 
 <header class="sheet">
   <div class="wrap">
     <div class="titlebar">
-      <div class="brand">DATASHEET&nbsp;/&nbsp;PORTFOLIO</div>
+      <div class="brand">PORTFOLIO</div>
       <nav class="top">
-        <a href="#about">01 About</a>
-        <a href="#specs">02 Skills</a>
-        <a href="#projects">03 Projects</a>
-        <a href="#experience">04 Experience</a>
-        <a href="#contact">05 Contact</a>
+        <a href="#about">About</a>
+        <a href="#specs">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#publication">Publication</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
 
     <div class="titleblock">
       <div>
-        <div class="partno">PART NO. APC&nbsp;—&nbsp;ROBOTICS&nbsp;/&nbsp;2026</div>
-        <h1 class="name">Anushka Pradeep<br>Chauhan</h1>
+        <h1 class="name">Anushka Pradeep Chauhan</h1>
         <p class="role">Robotics Engineer — Perception · SLAM · Manipulation · Embedded Systems</p>
         <p class="desc">MS Robotics candidate at Northeastern University building ROS2-based autonomous systems — from perception-to-actuation manipulation pipelines to SLAM and sensor fusion for real-world robotic deployment.</p>
       </div>
@@ -346,17 +461,24 @@
         </div>
       </div>
     </div>
+
+    <div class="filmstrip" aria-hidden="true">
+      <div class="film-frame"><img src="./assets/hero-stretch.jpg" alt=""></div>
+      <div class="film-frame"><img src="./assets/picker-arm.jpg" alt=""></div>
+      <div class="film-frame"><img src="./assets/quadcopter.jpg" alt=""></div>
+      <div class="film-frame"><img src="./assets/clap-switch.jpg" alt=""></div>
+    </div>
   </div>
 </header>
 
 <main>
 
   <!-- 01 ABOUT -->
-  <section id="about">
+  <section id="about" style="padding-top:100px;">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">§01</span>
-        <span class="sec-title">General Description</span>
+        <span class="sec-title">About</span>
         <span class="sec-rule"></span>
       </div>
       <div class="about-grid reveal">
@@ -367,11 +489,13 @@
         </div>
         <div>
           <div class="edu-card">
+            <div class="edu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
             <h3>Northeastern University</h3>
             <div class="edu-meta">M.S. Robotics, Electrical &amp; Computer Engineering &nbsp;·&nbsp; Dec 2026 &nbsp;·&nbsp; Boston, MA</div>
             <div class="edu-courses">Mobile Robotics · Robot Sensing &amp; Navigation · Robotics Mechanics &amp; Control · Assistive Robotics · Human‑Robot Interaction · Robotics Science &amp; Systems · Legged Robotics</div>
           </div>
           <div class="edu-card">
+            <div class="edu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
             <h3>University of Mumbai</h3>
             <div class="edu-meta">B.E. Electronics &amp; Telecommunication &nbsp;·&nbsp; May 2024 &nbsp;·&nbsp; Mumbai, India</div>
             <div class="edu-courses">Signals &amp; Systems · Electronic Instrumentation &amp; Control · Embedded Systems · Digital System Design</div>
@@ -386,16 +510,56 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">§02</span>
-        <span class="sec-title">Specifications</span>
+        <span class="sec-title">Skills</span>
         <span class="sec-rule"></span>
       </div>
-      <table class="spec-table reveal">
-        <tr><td class="param">Programming</td><td>Python, C++, MATLAB, Linux, Git, Docker</td></tr>
-        <tr><td class="param">ROS &amp; Robotics</td><td>ROS, ROS2, MoveIt2, TF2, SLAM, Navigation, Motion Planning, Robot Manipulation</td></tr>
-        <tr><td class="param">Perception</td><td>OpenCV, YOLOv8, Vision Transformers, Depth Estimation, LiDAR + RGB‑D Sensor Fusion</td></tr>
-        <tr><td class="param">Simulation &amp; Tools</td><td>Gazebo, NVIDIA Isaac Sim, USD Scene Graph, Real‑to‑Sim Validation</td></tr>
-        <tr><td class="param">Hardware</td><td>RealSense D405, Kinect RGB‑D, Raspberry Pi, Embedded Linux Systems</td></tr>
-      </table>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v4l-4 6v6a2 2 0 002 2h12a2 2 0 002-2v-6l-4-6V3"/><path d="M8 3h8M6 13h12"/></svg>
+          </div>
+          <h3>Programming</h3>
+          <div class="skill-pills">
+            <span>Python</span><span>C++</span><span>MATLAB</span><span>Linux</span><span>Git</span><span>Docker</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.2 7.5l2.6 1.5M17.2 15l2.6 1.5M4.2 16.5l2.6-1.5M17.2 9l2.6-1.5"/></svg>
+          </div>
+          <h3>ROS &amp; Robotics</h3>
+          <div class="skill-pills">
+            <span>ROS</span><span>ROS2</span><span>MoveIt2</span><span>TF2</span><span>SLAM</span><span>Navigation</span><span>Motion Planning</span><span>Manipulation</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Perception</h3>
+          <div class="skill-pills">
+            <span>OpenCV</span><span>YOLOv8</span><span>Vision Transformers</span><span>Depth Estimation</span><span>LiDAR + RGB‑D Fusion</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3>Simulation &amp; Tools</h3>
+          <div class="skill-pills">
+            <span>Gazebo</span><span>NVIDIA Isaac Sim</span><span>USD Scene Graph</span><span>Real‑to‑Sim Validation</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01"/></svg>
+          </div>
+          <h3>Hardware</h3>
+          <div class="skill-pills">
+            <span>RealSense D405</span><span>Kinect RGB‑D</span><span>Raspberry Pi</span><span>Embedded Linux</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -404,12 +568,12 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">§03</span>
-        <span class="sec-title">Application Notes</span>
+        <span class="sec-title">Projects</span>
         <span class="sec-rule"></span>
       </div>
 
       <div class="filters reveal" role="group" aria-label="Filter projects by category">
-        <button class="tag active" data-filter="all">ALL (11)</button>
+        <button class="tag active" data-filter="all">ALL (12)</button>
         <button class="tag" data-filter="perception">PERCEPTION</button>
         <button class="tag" data-filter="slam">SLAM &amp; STATE EST.</button>
         <button class="tag" data-filter="manipulation">MANIPULATION</button>
@@ -475,6 +639,24 @@
             <div class="card-links">
               <a href="https://ieeexplore.ieee.org/document/10731029" target="_blank" rel="noopener">→ IEEE Publication</a>
               <a href="https://youtu.be/ab31i-sO7LY" target="_blank" rel="noopener">→ Demo Video</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1b -->
+        <article class="card no-photo" data-cats="embedded hri">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Assistive Braille Input Device — Firmware &amp; Embedded Systems</h3>
+                <p class="card-sub">Tatum Robotics · Jan – May 2026</p>
+              </div>
+              <span class="card-status ongoing">PRE-LAUNCH</span>
+            </div>
+            <p class="card-desc">Firmware for a chorded Braille keyboard that lets blind/low‑vision users type on any computer with zero custom drivers. Designed a hardware‑agnostic chording state machine decoding asynchronous multi‑key presses into full Grade 1/2 (contracted) Unified English Braille, output over USB HID as standard keystrokes. Root‑caused and fixed an intermittent I2C bus failure on the custom PCB, tracing it to insufficient pull‑up resistance and validating the fix via register‑level testing. Product is unreleased, so specifics here are limited to what's publicly shareable.</p>
+            <p class="stack-line"><b>Stack:</b> CircuitPython · adafruit_hid · MCP23017 I2C GPIO Expander · Custom PCB</p>
+            <div class="card-tags">
+              <span class="pill">Embedded Firmware</span><span class="pill">I2C / Hardware Debug</span><span class="pill">USB HID</span><span class="pill">Assistive Tech</span>
             </div>
           </div>
         </article>
@@ -665,18 +847,18 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">§04</span>
-        <span class="sec-title">Revision History</span>
+        <span class="sec-title">Experience</span>
         <span class="sec-rule"></span>
       </div>
       <div class="timeline reveal">
         <div class="tl-item">
-          <div class="tl-date">JAN 2026 — PRESENT</div>
-          <div class="tl-role">Hardware &amp; Embedded Systems Intern</div>
-          <div class="tl-org">Tatum Robotics, Boston, MA</div>
+          <div class="tl-date">JAN 2026 — MAY 2026</div>
+          <div class="tl-role">Hardware &amp; Embedded Systems Intern <span class="card-status ongoing" style="margin-left:8px;">PRE-LAUNCH</span></div>
+          <div class="tl-org">Tatum Robotics, Boston, MA · Product unreleased — details limited to publicly shareable scope</div>
           <ul>
-            <li>Defining system requirements for an assistive input device to ensure reliable, responsive human‑to‑device interaction.</li>
-            <li>Reviewing embedded input pipelines — GPIO handling, firmware logic, host‑side communication.</li>
-            <li>Evaluating microcontroller platforms and validation workflows for assistive device prototyping.</li>
+            <li>Designed firmware for an assistive Braille input device translating chorded keypresses into standard USB keyboard output — see <a href="#projects">Braille Input Device</a> below.</li>
+            <li>Diagnosed and resolved an intermittent I2C communication failure on a custom PCB by root‑causing insufficient pull‑up resistance, validating the fix via bus‑scan and register‑level testing.</li>
+            <li>Authored a formal technical report documenting system architecture and handoff notes for future contributors.</li>
           </ul>
         </div>
         <div class="tl-item">
@@ -701,9 +883,12 @@
         <span class="sec-rule"></span>
       </div>
       <div class="pub-box reveal">
-        <div class="pub-text">
-          Patil, R.&nbsp;S., Apraj, A., Bhosale, S., Borikar, S., &amp; Chauhan, A. <em>"Elevating Industrial Picker Arm through Software Mechanic Fusion,"</em> IEEE ICNEWS, 2024.
-          <span class="doi">DOI / ieeexplore.ieee.org/document/10731029</span>
+        <div class="pub-row">
+          <div class="pub-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+          <div class="pub-text">
+            Patil, R.&nbsp;S., Apraj, A., Bhosale, S., Borikar, S., &amp; Chauhan, A. <em>"Elevating Industrial Picker Arm through Software Mechanic Fusion,"</em> IEEE ICNEWS, 2024.
+            <span class="doi">DOI / ieeexplore.ieee.org/document/10731029</span>
+          </div>
         </div>
         <a class="btn" href="https://ieeexplore.ieee.org/document/10731029" target="_blank" rel="noopener">View on IEEE Xplore →</a>
       </div>
@@ -717,21 +902,22 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">§06</span>
-      <span class="sec-title">Ordering Information</span>
+      <span class="sec-title">Contact</span>
       <span class="sec-rule"></span>
     </div>
     <div class="order-grid reveal">
-      <div>
+      <div class="contact-card">
         <ul class="contact-list">
-          <li><span class="k">Email</span> <a href="mailto:anushka639721@gmail.com">anushka639721@gmail.com</a></li>
-          <li><span class="k">Phone</span> 617&nbsp;908&nbsp;0472</li>
-          <li><span class="k">Location</span> Boston, MA</li>
-          <li><span class="k">LinkedIn</span> <a href="https://www.linkedin.com/in/anushkachauhan639721/" target="_blank" rel="noopener">anushkachauhan639721</a></li>
-          <li><span class="k">Résumé</span> <a href="./assets/Anushka_Chauhan_Resume.pdf" download>Download PDF ↓</a></li>
+          <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 7l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z"/></svg></span> <a href="mailto:anushka639721@gmail.com">anushka639721@gmail.com</a></li>
+          <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.3a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2z"/></svg></span> 617&nbsp;908&nbsp;0472</li>
+          <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Boston, MA</li>
+          <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13c0-2.2 1.8-4 4-4s4 1.8 4 4v8"/></svg></span> <a href="https://www.linkedin.com/in/anushkachauhan639721/" target="_blank" rel="noopener">/anushkachauhan639721</a></li>
+          <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span> <a href="./assets/Anushka_Chauhan_Resume.pdf" download>Download Résumé (PDF)</a></li>
         </ul>
         <p class="foot-note">© 2026 Anushka Pradeep Chauhan. Built as a static site — deploy freely via GitHub Pages.</p>
       </div>
-      <div>
+      <div class="form-card">
+        <p class="form-title">Send a message</p>
         <form id="hire-form" action="https://formsubmit.co/anushka639721@gmail.com" method="POST">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Your email" required>
