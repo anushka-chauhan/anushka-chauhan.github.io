@@ -1,64 +1,772 @@
-<body>
-  <style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    max-width: 900px;
-    margin: 60px auto;
-    line-height: 1.7;
-    padding: 0 20px;
-    color: #111;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anushka Pradeep Chauhan — Robotics Engineer</title>
+<meta name="description" content="Anushka Pradeep Chauhan — Robotics Engineer specializing in ROS2 autonomous systems, perception, SLAM, and manipulation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --paper-dim:#F1EFE7;
+    --ink:#14181F;
+    --graphite:#565F6E;
+    --hairline:#D8D4C8;
+    --amber:#FF6A00;
+    --amber-dim:#FFE3CC;
+    --circuit:#1F5FA8;
+    --ok:#1B7A4B;
+    --radius:2px;
   }
 
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.2em;
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--amber); color:var(--paper); }
+
+  a{ color:var(--circuit); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible, button:focus-visible, .tag:focus-visible{
+    outline:2px solid var(--amber); outline-offset:2px;
   }
 
-  h2 {
-    margin-top: 2.2em;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 6px;
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- registration marks (signature flourish) ---------- */
+  .reg{
+    position:fixed; width:14px; height:14px; z-index:40; pointer-events:none;
+    opacity:.45;
+  }
+  .reg::before,.reg::after{ content:""; position:absolute; background:var(--ink); }
+  .reg::before{ left:6px; top:0; width:2px; height:14px; }
+  .reg::after{ left:0; top:6px; width:14px; height:2px; }
+  .reg.tl{ top:14px; left:14px; }
+  .reg.tr{ top:14px; right:14px; }
+  .reg.bl{ bottom:14px; left:14px; }
+  .reg.br{ bottom:14px; right:14px; }
+  @media (max-width:700px){ .reg{ display:none; } }
+
+  /* ---------- edge label ---------- */
+  .edge-label{
+    position:fixed; left:0; top:50%; transform:translateY(-50%) rotate(180deg);
+    writing-mode:vertical-rl;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.18em;
+    color:var(--graphite);
+    padding:10px 6px;
+    z-index:30;
+    opacity:.7;
+  }
+  @media (max-width:900px){ .edge-label{ display:none; } }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+  @media (max-width:600px){ .wrap{ padding:0 18px; } }
+
+  /* ---------- header / datasheet title block ---------- */
+  header.sheet{
+    border-bottom:1px solid var(--ink);
+    padding:22px 0 0;
+  }
+  .titlebar{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    padding-bottom:14px;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.14em; color:var(--graphite);
+  }
+  nav.top{
+    display:flex; gap:22px; font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:.04em;
+  }
+  nav.top a{ color:var(--ink); }
+  nav.top a:hover{ color:var(--amber); text-decoration:none; }
+  @media (max-width:700px){ nav.top{ display:none; } }
+
+  .titleblock{
+    display:grid; grid-template-columns:1.5fr 1fr; gap:32px;
+    padding:26px 0 30px; border-top:1px solid var(--hairline);
+  }
+  @media (max-width:800px){ .titleblock{ grid-template-columns:1fr; } }
+
+  .partno{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    color:var(--amber); letter-spacing:.12em; margin-bottom:10px; font-weight:600;
+  }
+  h1.name{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.4rem, 5.5vw, 4rem);
+    line-height:1.02;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px; color:var(--graphite); margin:0 0 18px;
+  }
+  .desc{ max-width:52ch; color:var(--ink); font-size:15px; }
+
+  .status-card{
+    border:1px solid var(--ink);
+    padding:16px 18px;
+    align-self:start;
+    background:var(--paper-dim);
+  }
+  .status-row{ display:flex; align-items:center; gap:9px; margin-bottom:10px; }
+  .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--ok);
+    box-shadow:0 0 0 3px rgba(27,122,75,.15);
+    animation:pulse 2.2s infinite;
+    flex:none;
+  }
+  @keyframes pulse{
+    0%,100%{ box-shadow:0 0 0 3px rgba(27,122,75,.15); }
+    50%{ box-shadow:0 0 0 6px rgba(27,122,75,.05); }
+  }
+  @media (prefers-reduced-motion:reduce){ .dot{ animation:none; } }
+  .status-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.06em; }
+  .kv{ display:flex; justify-content:space-between; font-size:13px; padding:5px 0; border-top:1px dashed var(--hairline); gap:12px; }
+  .kv:first-of-type{ border-top:none; }
+  .kv dt{ color:var(--graphite); font-family:'IBM Plex Mono',monospace; font-size:11.5px; }
+  .kv dd{ margin:0; text-align:right; }
+  .cta-row{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.04em;
+    padding:9px 14px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+    display:inline-block; cursor:pointer;
+  }
+  .btn:hover{ background:var(--amber); border-color:var(--amber); text-decoration:none; color:var(--ink); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- section chrome ---------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--hairline); }
+  section:last-of-type{ border-bottom:none; }
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:34px;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono', monospace; color:var(--amber); font-weight:700; font-size:14px;
+  }
+  .sec-title{
+    font-family:'IBM Plex Sans Condensed', sans-serif; font-weight:700;
+    font-size:1.6rem; letter-spacing:.01em; text-transform:uppercase;
+  }
+  .sec-rule{ flex:1; height:1px; background:var(--hairline); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+  /* ---------- about ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:44px; }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ font-size:16px; }
+  .edu-card{ border-left:3px solid var(--amber); padding:4px 0 4px 16px; margin-bottom:22px; }
+  .edu-card h3{ margin:0 0 2px; font-size:16px; font-family:'IBM Plex Sans', sans-serif; font-weight:600; }
+  .edu-meta{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--graphite); margin-bottom:6px; }
+  .edu-courses{ font-size:13px; color:var(--graphite); }
+
+  /* ---------- specifications table ---------- */
+  .spec-table{ width:100%; border-collapse:collapse; }
+  .spec-table tr{ border-top:1px solid var(--hairline); }
+  .spec-table tr:first-child{ border-top:1px solid var(--ink); }
+  .spec-table tr:last-child{ border-bottom:1px solid var(--ink); }
+  .spec-table td{ padding:13px 10px; vertical-align:top; font-size:14.5px; }
+  .spec-table td.param{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    color:var(--graphite); width:190px; white-space:nowrap; letter-spacing:.03em;
+    text-transform:uppercase;
+  }
+  @media (max-width:650px){
+    .spec-table td.param{ white-space:normal; width:120px; font-size:11px; }
   }
 
-  ul {
-    padding-left: 20px;
+  /* ---------- project filter chips ---------- */
+  .filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:30px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.03em;
+    border:1px solid var(--ink); background:transparent; color:var(--ink);
+    padding:7px 12px; cursor:pointer; border-radius:var(--radius);
   }
+  .tag.active{ background:var(--ink); color:var(--paper); }
+  .tag:hover{ background:var(--amber); border-color:var(--amber); color:var(--ink); }
 
-  a {
-    color: #0066cc;
-    text-decoration: none;
+  /* ---------- project cards (application notes) ---------- */
+  .projects{ display:flex; flex-direction:column; gap:2px; }
+  .card{
+    border:1px solid var(--hairline);
+    background:var(--paper);
+    display:grid; grid-template-columns:220px 1fr;
+    transition:border-color .2s ease;
   }
+  .card:hover{ border-color:var(--ink); }
+  .card.no-photo{ grid-template-columns:1fr; }
+  @media (max-width:750px){ .card{ grid-template-columns:1fr; } }
 
-  a:hover {
-    text-decoration: underline;
+  .card-media{
+    position:relative; background:var(--paper-dim); overflow:hidden; min-height:150px;
+    border-right:1px solid var(--hairline);
   }
+  @media (max-width:750px){ .card-media{ border-right:none; border-bottom:1px solid var(--hairline); } }
+  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(15%); transition:filter .3s ease, transform .4s ease; }
+  .card:hover .card-media img{ filter:grayscale(0%); transform:scale(1.03); }
+  .card-media .fig{
+    position:absolute; bottom:0; left:0; right:0; background:rgba(20,24,31,.82); color:var(--paper);
+    font-family:'IBM Plex Mono', monospace; font-size:10px; padding:4px 8px; letter-spacing:.03em;
+  }
+  .card-media.diagram{ display:flex; align-items:center; justify-content:center; padding:18px; }
+
+  .card-body{ padding:22px 24px; }
+  .card-top{ display:flex; justify-content:space-between; gap:16px; align-items:flex-start; margin-bottom:8px; }
+  .card-title{ font-family:'IBM Plex Sans Condensed', sans-serif; font-weight:700; font-size:1.22rem; margin:0; }
+  .card-sub{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); margin:2px 0 0; }
+  .card-status{
+    flex:none; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.05em;
+    padding:3px 8px; border:1px solid var(--hairline); color:var(--graphite); white-space:nowrap;
+  }
+  .card-status.ongoing{ color:var(--amber); border-color:var(--amber); }
+  .card-status.pub{ color:var(--ok); border-color:var(--ok); }
+
+  .card-desc{ font-size:14px; margin:10px 0 14px; color:var(--ink); }
+  .stack-line{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--graphite); margin-bottom:14px; }
+  .stack-line b{ color:var(--ink); font-weight:600; }
+
+  .results{ display:flex; flex-wrap:wrap; gap:22px; margin-bottom:14px; }
+  .result{ min-width:80px; }
+  .result .num{ font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:1.3rem; color:var(--amber); display:block; line-height:1; }
+  .result .lbl{ font-size:10.5px; color:var(--graphite); text-transform:uppercase; letter-spacing:.03em; }
+
+  .card-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .pill{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.02em;
+    border:1px solid var(--hairline); padding:3px 8px; color:var(--graphite);
+  }
+  .card-links{ margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; display:flex; gap:16px; }
+
+  /* ---------- experience timeline ---------- */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--hairline); }
+  .tl-item{ position:relative; padding-bottom:34px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-28px; top:4px; width:9px; height:9px;
+    background:var(--paper); border:2px solid var(--amber); border-radius:50%;
+  }
+  .tl-date{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--amber); font-weight:600; letter-spacing:.03em; }
+  .tl-role{ font-weight:700; font-size:1.05rem; margin:3px 0 1px; font-family:'IBM Plex Sans Condensed',sans-serif; }
+  .tl-org{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--graphite); margin-bottom:8px; }
+  .tl-item ul{ margin:0; padding-left:18px; font-size:14px; }
+  .tl-item li{ margin-bottom:5px; }
+
+  /* ---------- publication ---------- */
+  .pub-box{
+    border:1px solid var(--ink); background:var(--paper-dim); padding:22px 24px;
+    display:flex; justify-content:space-between; gap:20px; align-items:center; flex-wrap:wrap;
+  }
+  .pub-text{ font-size:14.5px; max-width:60ch; }
+  .pub-text .doi{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); display:block; margin-top:6px; }
+
+  /* ---------- footer / ordering info ---------- */
+  footer{ padding:56px 0 90px; }
+  .order-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  @media (max-width:750px){ .order-grid{ grid-template-columns:1fr; } }
+  .contact-list{ list-style:none; padding:0; margin:0; }
+  .contact-list li{ display:flex; gap:14px; padding:10px 0; border-top:1px dashed var(--hairline); font-size:14.5px; }
+  .contact-list li:first-child{ border-top:none; }
+  .contact-list span.k{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); width:70px; flex:none; padding-top:2px; text-transform:uppercase; letter-spacing:.03em;}
+  .foot-note{ margin-top:26px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite); }
+
+  #hire-form{ display:flex; flex-direction:column; gap:10px; }
+  #hire-form input, #hire-form textarea{
+    font-family:'IBM Plex Sans', sans-serif; font-size:14px; padding:11px 12px;
+    border:1px solid var(--ink); background:var(--paper); color:var(--ink);
+  }
+  #hire-form textarea{ resize:vertical; min-height:90px; }
+  #hire-form input:focus, #hire-form textarea:focus{ outline:2px solid var(--amber); outline-offset:1px; }
+  .form-note{ font-size:12px; color:var(--graphite); margin-top:4px; }
+
 </style>
+</head>
+<body>
 
-  <h1>Anushka Chauhan</h1>
-  <p><strong>Robotics Master’s Student</strong></p>
+<div class="reg tl" aria-hidden="true"></div>
+<div class="reg tr" aria-hidden="true"></div>
+<div class="reg bl" aria-hidden="true"></div>
+<div class="reg br" aria-hidden="true"></div>
+<div class="edge-label" aria-hidden="true">ROBOTICS ENGINEER &nbsp;·&nbsp; REV 2026.07 &nbsp;·&nbsp; BOSTON, MA</div>
 
-  <h2>About</h2>
-  <p>
-    I am a Master’s student in Robotics with interests in sensing,
-    navigation, and intelligent robotic systems.
-  </p>
+<header class="sheet">
+  <div class="wrap">
+    <div class="titlebar">
+      <div class="brand">DATASHEET&nbsp;/&nbsp;PORTFOLIO</div>
+      <nav class="top">
+        <a href="#about">01 About</a>
+        <a href="#specs">02 Skills</a>
+        <a href="#projects">03 Projects</a>
+        <a href="#experience">04 Experience</a>
+        <a href="#contact">05 Contact</a>
+      </nav>
+    </div>
 
-  <h2>Projects</h2>
-  <ul>
-    <li><strong>Robotics Sensing and Navigation</strong> – SLAM, perception, and path planning</li>
-    <li><strong>Autonomous Navigation</strong> – Sensor fusion and motion planning</li>
-  </ul>
+    <div class="titleblock">
+      <div>
+        <div class="partno">PART NO. APC&nbsp;—&nbsp;ROBOTICS&nbsp;/&nbsp;2026</div>
+        <h1 class="name">Anushka Pradeep<br>Chauhan</h1>
+        <p class="role">Robotics Engineer — Perception · SLAM · Manipulation · Embedded Systems</p>
+        <p class="desc">MS Robotics candidate at Northeastern University building ROS2-based autonomous systems — from perception-to-actuation manipulation pipelines to SLAM and sensor fusion for real-world robotic deployment.</p>
+      </div>
 
-  <h2>Skills</h2>
-  <ul>
-    <li>ROS / ROS2</li>
-    <li>Python, C++</li>
-    <li>SLAM, Navigation, Perception</li>
-  </ul>
+      <div class="status-card">
+        <div class="status-row">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="status-label">OPEN TO FULL-TIME ROLES · DEC 2026</span>
+        </div>
+        <dl style="margin:0;">
+          <div class="kv"><dt>LOCATION</dt><dd>Boston, MA</dd></div>
+          <div class="kv"><dt>EMAIL</dt><dd><a href="mailto:anushka639721@gmail.com">anushka639721@gmail.com</a></dd></div>
+          <div class="kv"><dt>PHONE</dt><dd>617&nbsp;908&nbsp;0472</dd></div>
+          <div class="kv"><dt>LINKEDIN</dt><dd><a href="https://www.linkedin.com/in/anushkachauhan639721/" target="_blank" rel="noopener">/anushkachauhan639721</a></dd></div>
+        </dl>
+        <div class="cta-row">
+          <a class="btn" href="./assets/Anushka_Chauhan_Resume.pdf" download>↓ Download Résumé</a>
+          <a class="btn ghost" href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-  <h2>Links</h2>
-  <ul>
-    <li><a href="https://github.com/anushka-chauhan">GitHub</a></li>
-    <li><a href="#">Resume (PDF)</a></li>
-  </ul>
+<main>
+
+  <!-- 01 ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§01</span>
+        <span class="sec-title">General Description</span>
+        <span class="sec-rule"></span>
+      </div>
+      <div class="about-grid reveal">
+        <div>
+          <p>Anushka is a robotics engineer focused on getting autonomous systems out of simulation and onto real hardware. Her work spans the full stack of a manipulation pipeline — RGB‑D perception, TF transforms, motion planning, and closed‑loop control — validated in Gazebo and Isaac Sim before deployment on physical robots like the Hello Robot Stretch RE3.</p>
+          <p>Alongside manipulation, she works on SLAM and state estimation (robust pose‑graph optimization, Kalman‑filtered sensor fusion for AUV navigation), and on assistive and human‑robot‑interaction systems — including a wearable that gives hearing‑impaired users directional awareness of oncoming vehicles via Doppler‑based audio processing.</p>
+          <p>Currently an embedded systems intern at Tatum Robotics in Boston, working on human‑to‑device interaction pipelines for assistive input hardware.</p>
+        </div>
+        <div>
+          <div class="edu-card">
+            <h3>Northeastern University</h3>
+            <div class="edu-meta">M.S. Robotics, Electrical &amp; Computer Engineering &nbsp;·&nbsp; Dec 2026 &nbsp;·&nbsp; Boston, MA</div>
+            <div class="edu-courses">Mobile Robotics · Robot Sensing &amp; Navigation · Robotics Mechanics &amp; Control · Assistive Robotics · Human‑Robot Interaction · Robotics Science &amp; Systems · Legged Robotics</div>
+          </div>
+          <div class="edu-card">
+            <h3>University of Mumbai</h3>
+            <div class="edu-meta">B.E. Electronics &amp; Telecommunication &nbsp;·&nbsp; May 2024 &nbsp;·&nbsp; Mumbai, India</div>
+            <div class="edu-courses">Signals &amp; Systems · Electronic Instrumentation &amp; Control · Embedded Systems · Digital System Design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 SPECIFICATIONS -->
+  <section id="specs">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§02</span>
+        <span class="sec-title">Specifications</span>
+        <span class="sec-rule"></span>
+      </div>
+      <table class="spec-table reveal">
+        <tr><td class="param">Programming</td><td>Python, C++, MATLAB, Linux, Git, Docker</td></tr>
+        <tr><td class="param">ROS &amp; Robotics</td><td>ROS, ROS2, MoveIt2, TF2, SLAM, Navigation, Motion Planning, Robot Manipulation</td></tr>
+        <tr><td class="param">Perception</td><td>OpenCV, YOLOv8, Vision Transformers, Depth Estimation, LiDAR + RGB‑D Sensor Fusion</td></tr>
+        <tr><td class="param">Simulation &amp; Tools</td><td>Gazebo, NVIDIA Isaac Sim, USD Scene Graph, Real‑to‑Sim Validation</td></tr>
+        <tr><td class="param">Hardware</td><td>RealSense D405, Kinect RGB‑D, Raspberry Pi, Embedded Linux Systems</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 03 PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§03</span>
+        <span class="sec-title">Application Notes</span>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="filters reveal" role="group" aria-label="Filter projects by category">
+        <button class="tag active" data-filter="all">ALL (11)</button>
+        <button class="tag" data-filter="perception">PERCEPTION</button>
+        <button class="tag" data-filter="slam">SLAM &amp; STATE EST.</button>
+        <button class="tag" data-filter="manipulation">MANIPULATION</button>
+        <button class="tag" data-filter="embedded">EMBEDDED / IOT</button>
+        <button class="tag" data-filter="hri">HRI / ASSISTIVE</button>
+      </div>
+
+      <div class="projects reveal" id="project-list">
+
+        <!-- 1 -->
+        <article class="card" data-cats="perception manipulation">
+          <div class="card-media">
+            <img src="./assets/hero-stretch.jpg" alt="Hello Robot Stretch RE3 performing autonomous drink pouring in a lab workspace" loading="lazy">
+            <span class="fig">FIG. 01 — STRETCH RE3, LAB DEPLOYMENT</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Autonomous Drink Pouring — Stretch RE3</h3>
+                <p class="card-sub">Northeastern University · Feb – Apr 2025</p>
+              </div>
+              <span class="card-status">FEB–APR 2025</span>
+            </div>
+            <p class="card-desc">Full perception‑to‑actuation pipeline for assistive liquid transfer: RGB‑D cup detection, 3D pose reprojection, TF2 transform to base_link, and incremental wrist‑roll pouring control — validated in a custom Gazebo world before hardware trials.</p>
+            <p class="stack-line"><b>Stack:</b> ROS2 Humble · MoveIt2 · YOLOv8n · RealSense D405 · TF2</p>
+            <div class="results">
+              <div class="result"><span class="num">90%</span><span class="lbl">task success</span></div>
+              <div class="result"><span class="num">&lt;40ms</span><span class="lbl">frame→actuation latency</span></div>
+              <div class="result"><span class="num">±0.9cm</span><span class="lbl">depth error</span></div>
+              <div class="result"><span class="num">-30%</span><span class="lbl">response latency</span></div>
+            </div>
+            <div class="card-tags">
+              <span class="pill">ROS2</span><span class="pill">MoveIt2</span><span class="pill">Real‑to‑Sim</span><span class="pill">Assistive Robotics</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card" data-cats="perception manipulation embedded">
+          <div class="card-media">
+            <img src="./assets/picker-arm.jpg" alt="Custom-built industrial picker arm with labeled servo motors and suction gripper" loading="lazy">
+            <span class="fig">FIG. 02 — 6‑DOF PICKER ARM, HARDWARE BUILD</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Industrial Picker Arm — Software/Mechanic Fusion</h3>
+                <p class="card-sub">University of Mumbai · Sep 2023 – Mar 2024 · <span style="color:var(--ok)">Published, IEEE ICNEWS 2024</span></p>
+              </div>
+              <span class="card-status pub">PUBLISHED</span>
+            </div>
+            <p class="card-desc">Built a 6‑servo robotic arm from scratch and fused it with a ROS + YOLOv8 vision stack for real‑time package detection, sorting, and placement using Kinect depth sensing and a Raspberry Pi 4 control node.</p>
+            <p class="stack-line"><b>Stack:</b> ROS · YOLOv8 · Kinect RGB‑D · Raspberry Pi 4 · PCA9685 PWM</p>
+            <div class="results">
+              <div class="result"><span class="num">93%</span><span class="lbl">pick &amp; place success</span></div>
+              <div class="result"><span class="num">25Hz</span><span class="lbl">detection rate</span></div>
+              <div class="result"><span class="num">±2mm</span><span class="lbl">depth accuracy @1m</span></div>
+              <div class="result"><span class="num">-35%</span><span class="lbl">classification errors</span></div>
+            </div>
+            <div class="card-tags">
+              <span class="pill">ROS</span><span class="pill">Computer Vision</span><span class="pill">Embedded Control</span>
+            </div>
+            <div class="card-links">
+              <a href="https://ieeexplore.ieee.org/document/10731029" target="_blank" rel="noopener">→ IEEE Publication</a>
+              <a href="https://youtu.be/ab31i-sO7LY" target="_blank" rel="noopener">→ Demo Video</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card no-photo" data-cats="slam">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">riSAM — Robust Incremental Smoothing &amp; Mapping</h3>
+                <p class="card-sub">Northeastern University · Sep – Dec 2024</p>
+              </div>
+              <span class="card-status">SEP–DEC 2024</span>
+            </div>
+            <p class="card-desc">Implemented a full riSAM pose‑graph pipeline from factor‑graph fundamentals, using GNC and a SIG kernel for outlier rejection. Benchmarked incremental vs. batch optimization on MIT CSAIL, Manhattan, and Intel datasets under injected drift and corner noise.</p>
+            <p class="stack-line"><b>Stack:</b> Python · Factor Graphs · Trust‑Region Optimization · Pose‑Graph SLAM</p>
+            <div class="results">
+              <div class="result"><span class="num">~80%</span><span class="lbl">trajectory error reduction</span></div>
+              <div class="result"><span class="num">-15%</span><span class="lbl">localization drift</span></div>
+              <div class="result"><span class="num">+15%</span><span class="lbl">optimization efficiency</span></div>
+            </div>
+            <div class="card-tags">
+              <span class="pill">SLAM</span><span class="pill">Localization</span><span class="pill">State Estimation</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card no-photo" data-cats="slam perception">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Current‑Aware Kalman Filter for AUV Navigation</h3>
+                <p class="card-sub">Northeastern University</p>
+              </div>
+            </div>
+            <p class="card-desc">Designed a full state‑space Kalman filter (A, H, Q, R, P) fusing GPS, DVL, and modeled ocean‑current dynamics to produce stable real‑time position and velocity estimates for an autonomous underwater vehicle under noisy, disturbed conditions.</p>
+            <p class="stack-line"><b>Stack:</b> Python · NumPy · Matplotlib · Kalman Filtering · Sensor Fusion</p>
+            <div class="results">
+              <div class="result"><span class="num">0.00039s</span><span class="lbl">compute time / step</span></div>
+              <div class="result"><span class="num">6‑dim</span><span class="lbl">state‑space model</span></div>
+            </div>
+            <div class="card-tags">
+              <span class="pill">Kalman Filtering</span><span class="pill">Sensor Fusion</span><span class="pill">Navigation</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card no-photo" data-cats="hri embedded">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Doppler‑Based Directional Awareness Wearable</h3>
+                <p class="card-sub">Northeastern University · Sep – Dec 2025</p>
+              </div>
+              <span class="card-status ongoing">ONGOING</span>
+            </div>
+            <p class="card-desc">A wrist‑worn sound‑localization system to help hearing‑impaired users detect the direction and motion of car horns. Combines multi‑microphone TDOA estimation, GCC‑PHAT cross‑correlation, and Doppler shift analysis to classify oncoming vs. receding vehicles.</p>
+            <p class="stack-line"><b>Stack:</b> Python · MATLAB · FFT · GCC‑PHAT · TDOA Estimation</p>
+            <div class="results">
+              <div class="result"><span class="num">±10°</span><span class="lbl">direction accuracy</span></div>
+              <div class="result"><span class="num">&lt;100ms</span><span class="lbl">response time</span></div>
+            </div>
+            <div class="card-tags">
+              <span class="pill">Assistive Tech</span><span class="pill">Audio DSP</span><span class="pill">Wearables</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card no-photo" data-cats="hri">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">HRI Study — Speed × Object Type on Handover Perception</h3>
+                <p class="card-sub">Northeastern University</p>
+              </div>
+              <span class="card-status ongoing">ONGOING</span>
+            </div>
+            <p class="card-desc">A 6‑condition user study (3 speeds × 2 object types) examining how a robot's approach speed and the object it hands over affect perceived safety, comfort, and predictability during robot‑to‑human handovers, using a Trossen robotic arm.</p>
+            <p class="stack-line"><b>Stack:</b> Trossen Arm · Experimental Design · 7‑point Perception Scales</p>
+            <div class="card-tags">
+              <span class="pill">Human‑Robot Interaction</span><span class="pill">User Studies</span><span class="pill">Safety Perception</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="card no-photo" data-cats="embedded">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Sun‑Tracking Solar Panel</h3>
+                <p class="card-sub">University of Mumbai</p>
+              </div>
+            </div>
+            <p class="card-desc">Arduino‑driven dual‑LDR feedback loop that rotates a solar panel toward the brighter of two light sensors via a servo, keeping the panel perpendicular to the sun through morning, noon, and evening.</p>
+            <p class="stack-line"><b>Stack:</b> Arduino Uno · Servo.h · LDR Voltage Dividers</p>
+            <div class="card-tags">
+              <span class="pill">Embedded Systems</span><span class="pill">Control</span><span class="pill">Arduino</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="card no-photo" data-cats="embedded">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Fire Security Alarm System (IoT)</h3>
+                <p class="card-sub">University of Mumbai</p>
+              </div>
+            </div>
+            <p class="card-desc">An ESP8266‑based fire detection system combining an MQ2 gas sensor and flame sensor to trigger a local buzzer/LED alarm and push real‑time notifications over Wi‑Fi via the Blynk app — built for continuous 24/7 monitoring.</p>
+            <p class="stack-line"><b>Stack:</b> NodeMCU ESP8266 · MQ2 Sensor · Flame Sensor · Blynk IoT</p>
+            <div class="card-tags">
+              <span class="pill">IoT</span><span class="pill">Embedded Systems</span><span class="pill">Real‑Time Alerts</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="card" data-cats="embedded">
+          <div class="card-media diagram">
+            <img src="./assets/quadcopter.jpg" alt="Fully assembled quadcopter drone with four brushless motors and flight controller" loading="lazy" style="object-fit:contain;">
+            <span class="fig">FIG. 03 — QUADCOPTER, ASSEMBLED UNIT</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Fabrication of a Quadcopter Drone</h3>
+                <p class="card-sub">University of Mumbai</p>
+              </div>
+            </div>
+            <p class="card-desc">Designed and built a UAV from scratch — brushless motors, ESCs, and a KK 2.1.5 flight controller — and programmed ATmega16 firmware with PID‑based stabilization for takeoff, landing, and multi‑axis manual flight over a 6‑channel RC link.</p>
+            <p class="stack-line"><b>Stack:</b> ATmega16 · KK 2.1.5 FC · ESC Calibration · BLDC Motor Control</p>
+            <div class="card-tags">
+              <span class="pill">UAV Mechanics</span><span class="pill">Controls</span><span class="pill">Embedded Firmware</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="card no-photo" data-cats="perception">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Operations on Signals Using MATLAB</h3>
+                <p class="card-sub">University of Mumbai</p>
+              </div>
+            </div>
+            <p class="card-desc">Vectorized MATLAB implementations of core discrete‑time signal operations — addition, subtraction, multiplication, time‑reversal, shifting, and even/odd decomposition — verified with stem‑plot visualizations.</p>
+            <p class="stack-line"><b>Stack:</b> MATLAB · Vector/Matrix Manipulation · Stem Plotting</p>
+            <div class="card-tags">
+              <span class="pill">Signal Processing</span><span class="pill">DSP Fundamentals</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="card" data-cats="embedded">
+          <div class="card-media">
+            <img src="./assets/clap-switch.jpg" alt="Sound-activated clap switch circuit built and soldered on PCB" loading="lazy">
+            <span class="fig">FIG. 04 — CLAP SWITCH, PCB BUILD</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">Sound‑Activated Home Automation Clap Switch</h3>
+                <p class="card-sub">University of Mumbai</p>
+              </div>
+            </div>
+            <p class="card-desc">A low‑cost clap‑detection circuit — microphone → IC 741 amplifier → CD4017 decade counter — that toggles LEDs or appliances on/off, taken from breadboard prototype to a soldered PCB.</p>
+            <p class="stack-line"><b>Stack:</b> IC 741 · CD4017 · BC547 · Analog Electronics</p>
+            <div class="card-tags">
+              <span class="pill">Analog Electronics</span><span class="pill">PCB Prototyping</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§04</span>
+        <span class="sec-title">Revision History</span>
+        <span class="sec-rule"></span>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-date">JAN 2026 — PRESENT</div>
+          <div class="tl-role">Hardware &amp; Embedded Systems Intern</div>
+          <div class="tl-org">Tatum Robotics, Boston, MA</div>
+          <ul>
+            <li>Defining system requirements for an assistive input device to ensure reliable, responsive human‑to‑device interaction.</li>
+            <li>Reviewing embedded input pipelines — GPIO handling, firmware logic, host‑side communication.</li>
+            <li>Evaluating microcontroller platforms and validation workflows for assistive device prototyping.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">JUN 2022 — MAR 2023</div>
+          <div class="tl-role">Industrial Automation Intern</div>
+          <div class="tl-org">K R Petroleum, Mumbai, India</div>
+          <ul>
+            <li>Developed PLC control logic for pump systems; built Python/SQL pipelines for predictive maintenance, cutting downtime 15%.</li>
+            <li>Integrated flow/level sensors with automation logic — 12% accuracy improvement, 40% less manual intervention.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATION -->
+  <section id="publication">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§05</span>
+        <span class="sec-title">Publication</span>
+        <span class="sec-rule"></span>
+      </div>
+      <div class="pub-box reveal">
+        <div class="pub-text">
+          Patil, R.&nbsp;S., Apraj, A., Bhosale, S., Borikar, S., &amp; Chauhan, A. <em>"Elevating Industrial Picker Arm through Software Mechanic Fusion,"</em> IEEE ICNEWS, 2024.
+          <span class="doi">DOI / ieeexplore.ieee.org/document/10731029</span>
+        </div>
+        <a class="btn" href="https://ieeexplore.ieee.org/document/10731029" target="_blank" rel="noopener">View on IEEE Xplore →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 06 CONTACT / ORDERING INFO -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">§06</span>
+      <span class="sec-title">Ordering Information</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="order-grid reveal">
+      <div>
+        <ul class="contact-list">
+          <li><span class="k">Email</span> <a href="mailto:anushka639721@gmail.com">anushka639721@gmail.com</a></li>
+          <li><span class="k">Phone</span> 617&nbsp;908&nbsp;0472</li>
+          <li><span class="k">Location</span> Boston, MA</li>
+          <li><span class="k">LinkedIn</span> <a href="https://www.linkedin.com/in/anushkachauhan639721/" target="_blank" rel="noopener">anushkachauhan639721</a></li>
+          <li><span class="k">Résumé</span> <a href="./assets/Anushka_Chauhan_Resume.pdf" download>Download PDF ↓</a></li>
+        </ul>
+        <p class="foot-note">© 2026 Anushka Pradeep Chauhan. Built as a static site — deploy freely via GitHub Pages.</p>
+      </div>
+      <div>
+        <form id="hire-form" action="https://formsubmit.co/anushka639721@gmail.com" method="POST">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <input type="text" name="company" placeholder="Company / role (optional)">
+          <textarea name="message" placeholder="Message" required></textarea>
+          <button class="btn" type="submit" style="align-self:flex-start;">Send Message →</button>
+          <p class="form-note">Form delivers straight to Anushka's inbox — no backend required.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Project category filter
+  const buttons = document.querySelectorAll('.tag');
+  const cards = document.querySelectorAll('#project-list .card');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c=>{
+        const cats = c.dataset.cats || '';
+        c.style.display = (f==='all' || cats.includes(f)) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
 </body>
+</html>
