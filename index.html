@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anushka Pradeep Chauhan — Robotics Engineer</title>
-<meta name="description" content="Anushka Pradeep Chauhan — Robotics Engineer specializing in ROS2 autonomous systems, perception, SLAM, and manipulation.">
+<title>Anushka Pradeep Chauhan | Robotics Engineer</title>
+<meta name="description" content="Anushka Pradeep Chauhan, Robotics Engineer specializing in ROS2 autonomous systems, perception, SLAM, and manipulation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
@@ -87,8 +87,7 @@
   header.sheet{
     position:relative;
     background:
-      radial-gradient(ellipse 700px 420px at 88% -10%, rgba(255,106,0,.20), transparent 60%),
-      radial-gradient(ellipse 500px 400px at 10% 110%, rgba(31,95,168,.18), transparent 60%),
+      radial-gradient(ellipse 800px 460px at 85% -10%, rgba(255,106,0,.16), transparent 60%),
       linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
     color:var(--paper);
     padding-top:22px;
@@ -130,12 +129,23 @@
   }
   @media (max-width:800px){ .titleblock{ grid-template-columns:1fr; } }
 
+  .name-row{ display:flex; align-items:center; gap:22px; margin-bottom:2px; }
+  .avatar{
+    position:relative; width:88px; height:88px; flex:none; border-radius:50%;
+    overflow:hidden; border:2px solid var(--hairline-dark); background:var(--paper-dim);
+    box-shadow:var(--shadow-md);
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .avatar .media-fallback{ display:none; align-items:center; justify-content:center; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,106,0,.15), rgba(31,95,168,.08)); color:#8B93A3; }
+  .avatar .media-fallback svg{ width:34px; height:34px; }
+  .avatar.img-missing .media-fallback{ display:flex; }
+  @media (max-width:640px){ .avatar{ width:64px; height:64px; } .name-row{ gap:14px; } }
   h1.name{
     font-family:'IBM Plex Sans Condensed', sans-serif;
     font-weight:700;
     font-size:clamp(1.9rem, 3.6vw, 2.9rem);
     line-height:1.08;
-    margin:14px 0 10px;
+    margin:0;
     letter-spacing:-.01em;
     color:#fff;
   }
@@ -144,6 +154,12 @@
     font-size:15px; color:var(--amber-dim); margin:0 0 20px; font-weight:500;
   }
   .desc{ max-width:54ch; color:#D6D9E0; font-size:15.5px; }
+  .manifesto{
+    margin:20px 0 0; max-width:56ch; padding:16px 0 0 20px;
+    border-left:3px solid var(--amber);
+    font-family:'IBM Plex Sans Condensed', sans-serif; font-weight:500;
+    font-size:17px; line-height:1.5; color:#F3EFE6; font-style:italic;
+  }
 
   .status-card{
     border:1px solid var(--hairline-dark);
@@ -224,6 +240,15 @@
   .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:44px; }
   @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
   .about-grid p{ font-size:16px; }
+  .about-photo{
+    position:relative; width:100%; aspect-ratio:4/5; border-radius:var(--radius);
+    overflow:hidden; background:var(--paper-dim); border:1px solid var(--hairline);
+    box-shadow:var(--shadow-sm); margin-bottom:18px;
+  }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .about-photo .media-fallback{ display:none; align-items:center; justify-content:center; position:absolute; inset:0; background:linear-gradient(135deg, var(--paper-dim), #EDEAE0); color:var(--hairline); }
+  .about-photo .media-fallback svg{ width:44px; height:44px; }
+  .about-photo.img-missing .media-fallback{ display:flex; }
   .edu-card{
     background:#fff; border:1px solid var(--hairline); border-radius:var(--radius);
     padding:20px 22px; margin-bottom:18px; box-shadow:var(--shadow-sm);
@@ -266,6 +291,19 @@
     background:var(--paper-dim); border:1px solid var(--hairline); color:var(--ink);
     padding:5px 10px; border-radius:20px;
   }
+  .mini-list{ margin:0; padding-left:16px; font-size:13px; color:var(--ink); line-height:1.5; }
+  .mini-list li{ margin-bottom:9px; }
+  .mini-list li:last-child{ margin-bottom:0; }
+  .mini-list b{ font-weight:600; }
+  .beyond-photo{
+    position:relative; width:100%; aspect-ratio:16/10; border-radius:8px;
+    overflow:hidden; background:var(--paper-dim); border:1px solid var(--hairline);
+    margin-bottom:14px;
+  }
+  .beyond-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .beyond-photo .media-fallback{ display:none; align-items:center; justify-content:center; position:absolute; inset:0; background:linear-gradient(135deg, var(--paper-dim), #EDEAE0); color:var(--hairline); }
+  .beyond-photo .media-fallback svg{ width:28px; height:28px; }
+  .beyond-photo.img-missing .media-fallback{ display:flex; }
 
   /* ---------- project filter chips ---------- */
   .filters{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:30px; }
@@ -311,6 +349,88 @@
     font-family:'IBM Plex Mono', monospace; font-size:10px; padding:4px 8px; letter-spacing:.03em;
   }
   .card-media.diagram{ display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sig-badge{
+    position:absolute; top:10px; left:10px; z-index:2;
+    background:var(--amber); color:#fff; font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px; font-weight:700; letter-spacing:.03em;
+    padding:5px 10px; border-radius:20px; box-shadow:var(--shadow-sm);
+  }
+  .card.is-signature{ border-top-color:var(--amber); }
+  .signature-tag{ border-color:var(--amber); color:var(--amber-deep); font-weight:700; }
+  .signature-tag.active{ background:var(--amber); border-color:var(--amber); color:#fff; }
+
+  .media-fallback{
+    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--paper-dim), #EDEAE0); color:var(--hairline);
+  }
+  .media-fallback svg{ width:34px; height:34px; opacity:.6; }
+  .card-media.img-missing .media-fallback{ display:flex; }
+
+  .card-teaser{ font-size:14px; color:var(--graphite); margin:8px 0 14px; }
+  .learn-more{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; letter-spacing:.03em;
+    color:var(--amber-deep); background:none; border:none; cursor:pointer; padding:0;
+    display:inline-flex; align-items:center; gap:4px; margin-top:6px;
+  }
+  .learn-more:hover{ text-decoration:underline; }
+
+  .img-help{ font-size:12.5px; color:var(--graphite); margin-top:20px; }
+  .img-help code{ background:var(--paper-dim); border:1px solid var(--hairline); border-radius:4px; padding:1px 6px; font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- project detail modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:100; display:none;
+    background:rgba(11,14,20,.72); backdrop-filter:blur(4px);
+    align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background:#fff; border-radius:14px; max-width:860px; width:100%; max-height:88vh;
+    overflow-y:auto; box-shadow:var(--shadow-lg); position:relative;
+  }
+  .modal-media{ position:relative; width:100%; aspect-ratio:16/8; background:var(--paper-dim); overflow:hidden; }
+  .modal-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .modal-media.img-missing img{ display:none; }
+  .modal-body{ padding:28px 30px 32px; }
+  .modal-close{
+    position:absolute; top:14px; right:14px; z-index:2;
+    width:34px; height:34px; border-radius:50%; border:none; background:rgba(20,24,31,.75); color:#fff;
+    font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ background:var(--amber); }
+  body.modal-lock{ overflow:hidden; }
+
+  /* ---------- deep-dive case study content ---------- */
+  .dd-context{ display:flex; gap:10px; flex-wrap:wrap; margin:-4px 0 18px; }
+  .dd-context span{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--graphite);
+    background:var(--paper-dim); border:1px solid var(--hairline); padding:4px 10px; border-radius:20px;
+  }
+  .dd-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:8px; }
+  @media (max-width:650px){ .dd-gallery{ grid-template-columns:1fr; } }
+  .dd-gallery figure{ margin:0; }
+  .dd-gallery img{
+    width:100%; aspect-ratio:4/3; object-fit:cover; display:block;
+    border-radius:8px; border:1px solid var(--hairline);
+  }
+  .dd-gallery figcaption{ font-size:11px; color:var(--graphite); margin-top:6px; line-height:1.4; }
+  .dd-section{ margin-top:26px; padding-top:22px; border-top:1px solid var(--hairline); }
+  .dd-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:700; letter-spacing:.06em;
+    color:var(--amber-deep); text-transform:uppercase; margin-bottom:10px;
+  }
+  .dd-text{ font-size:14.5px; line-height:1.65; color:var(--ink); margin:0; }
+  .dd-arch{ background:var(--paper-dim); border:1px solid var(--hairline); border-radius:10px; padding:16px; }
+  .dd-arch img{ width:100%; height:auto; display:block; border-radius:4px; }
+  .dd-list{ margin:0; padding:0; list-style:none; }
+  .dd-list li{
+    position:relative; padding:9px 0 9px 28px; font-size:14px; line-height:1.55;
+    border-top:1px dashed var(--hairline); color:var(--ink);
+  }
+  .dd-list li:first-child{ border-top:none; }
+  .dd-list li::before{ position:absolute; left:0; top:9px; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:700; }
+  .dd-list-check li::before{ content:"✓"; color:var(--ok); }
+  .dd-list-arrow li::before{ content:"→"; color:var(--amber-deep); }
 
   .card-body{ padding:22px 24px; }
   .card-top{ display:flex; justify-content:space-between; gap:16px; align-items:flex-start; margin-bottom:8px; }
@@ -417,10 +537,11 @@
 <nav class="side-nav" aria-label="Section navigation">
   <a href="#about"><span class="sn-num">01</span>About</a>
   <a href="#specs"><span class="sn-num">02</span>Skills</a>
-  <a href="#projects"><span class="sn-num">03</span>Projects</a>
-  <a href="#experience"><span class="sn-num">04</span>Experience</a>
-  <a href="#publication"><span class="sn-num">05</span>Publication</a>
-  <a href="#contact"><span class="sn-num">06</span>Contact</a>
+  <a href="#experience"><span class="sn-num">03</span>Experience</a>
+  <a href="#publication"><span class="sn-num">04</span>Publication</a>
+  <a href="#projects"><span class="sn-num">05</span>Projects</a>
+  <a href="#beyond"><span class="sn-num">06</span>Beyond the Lab</a>
+  <a href="#contact"><span class="sn-num">07</span>Contact</a>
 </nav>
 
 <header class="sheet">
@@ -430,24 +551,33 @@
       <nav class="top">
         <a href="#about">About</a>
         <a href="#specs">Skills</a>
-        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#publication">Publication</a>
+        <a href="#projects">Projects</a>
+        <a href="#beyond">Beyond the Lab</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
 
     <div class="titleblock">
       <div>
-        <h1 class="name">Anushka Pradeep Chauhan</h1>
-        <p class="role">Robotics Engineer — Perception · SLAM · Manipulation · Embedded Systems</p>
-        <p class="desc">MS Robotics candidate at Northeastern University building ROS2-based autonomous systems — from perception-to-actuation manipulation pipelines to SLAM and sensor fusion for real-world robotic deployment.</p>
+        <div class="name-row">
+          <div class="avatar">
+            <img src="./assets/headshot.jpg" alt="Anushka Pradeep Chauhan" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+          </div>
+          <h1 class="name">Anushka Pradeep Chauhan</h1>
+        </div>
+        <p class="role">Robotics Engineer · Perception · SLAM · Manipulation · Embedded Systems</p>
+        <p class="desc">MS Robotics candidate at Northeastern University building ROS2‑based autonomous systems for real‑world deployment.</p>
+        <blockquote class="manifesto">Perception to planning to control to firmware: I build the full stack, validate it in simulation, and prove it on real hardware, from a published IEEE paper to a Hello Robot Stretch RE3 pouring drinks in my lab.</blockquote>
       </div>
 
       <div class="status-card">
         <div class="status-row">
           <span class="dot" aria-hidden="true"></span>
-          <span class="status-label">OPEN TO FULL-TIME ROLES · DEC 2026</span>
+          <span class="status-label">OPEN TO FULL-TIME ROLES</span>
         </div>
         <dl style="margin:0;">
           <div class="kv"><dt>LOCATION</dt><dd>Boston, MA</dd></div>
@@ -483,11 +613,16 @@
       </div>
       <div class="about-grid reveal">
         <div>
-          <p>Anushka is a robotics engineer focused on getting autonomous systems out of simulation and onto real hardware. Her work spans the full stack of a manipulation pipeline — RGB‑D perception, TF transforms, motion planning, and closed‑loop control — validated in Gazebo and Isaac Sim before deployment on physical robots like the Hello Robot Stretch RE3.</p>
-          <p>Alongside manipulation, she works on SLAM and state estimation (robust pose‑graph optimization, Kalman‑filtered sensor fusion for AUV navigation), and on assistive and human‑robot‑interaction systems — including a wearable that gives hearing‑impaired users directional awareness of oncoming vehicles via Doppler‑based audio processing.</p>
-          <p>Currently an embedded systems intern at Tatum Robotics in Boston, working on human‑to‑device interaction pipelines for assistive input hardware.</p>
+          <p>I build robots end to end: perception that finds an object in the real world, planning that decides what to do with it, and control that carries it out, then I validate that pipeline in simulation before getting it working on physical hardware. That full stack shows up across a peer‑reviewed IEEE paper, a Hello Robot Stretch RE3 pouring drinks in a lab, an underwater vehicle's navigation filter, and firmware for a chorded keyboard I'm currently building at my internship.</p>
+          <p>I like problems that pull on the whole stack: SLAM and sensor fusion when the question is where am I, manipulation and controls when the question is what do I do next, and embedded firmware and hardware debugging when the question is why isn't this working. A few of my projects lean toward assistive and human‑robot‑interaction design, including a Braille keyboard, a wearable for hearing‑impaired pedestrians, and a study on what makes a robot handoff feel safe, because I find that a genuinely good design constraint, not because it's the only thing I build.</p>
+          <p>Outside coursework, I've led a hackathon team at Smart India Hackathon, built the object‑detection model for our Flipkart Grid Hackathon entry, co‑authored that IEEE paper as an undergrad, and currently chair media and communications for Northeastern's Graduate Women in Science and Engineering. I'm graduating in December 2026 and looking for a full‑time role where I can keep doing exactly this: taking a system from a sensor reading to working hardware.</p>
         </div>
         <div>
+          <div class="about-photo">
+            <img src="./assets/about-photo.jpg" alt="Anushka Pradeep Chauhan" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+          </div>
           <div class="edu-card">
             <div class="edu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
             <h3>Northeastern University</h3>
@@ -559,326 +694,56 @@
             <span>RealSense D405</span><span>Kinect RGB‑D</span><span>Raspberry Pi</span><span>Embedded Linux</span>
           </div>
         </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h3>Certifications</h3>
+          <div class="skill-pills">
+            <span>ROS2 (Udemy)</span><span>Data Science / ML &amp; AI Specialization</span><span>Data Analysis &amp; Visualization</span><span>Python Programming</span><span>SQL</span><span>Machine Learning Fundamentals</span><span>Robotics Internship (Kodacy)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 03 PROJECTS -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-num">§03</span>
-        <span class="sec-title">Projects</span>
-        <span class="sec-rule"></span>
-      </div>
-
-      <div class="filters reveal" role="group" aria-label="Filter projects by category">
-        <button class="tag active" data-filter="all">ALL (12)</button>
-        <button class="tag" data-filter="perception">PERCEPTION</button>
-        <button class="tag" data-filter="slam">SLAM &amp; STATE EST.</button>
-        <button class="tag" data-filter="manipulation">MANIPULATION</button>
-        <button class="tag" data-filter="embedded">EMBEDDED / IOT</button>
-        <button class="tag" data-filter="hri">HRI / ASSISTIVE</button>
-      </div>
-
-      <div class="projects reveal" id="project-list">
-
-        <!-- 1 -->
-        <article class="card" data-cats="perception manipulation">
-          <div class="card-media">
-            <img src="./assets/hero-stretch.jpg" alt="Hello Robot Stretch RE3 performing autonomous drink pouring in a lab workspace" loading="lazy">
-            <span class="fig">FIG. 01 — STRETCH RE3, LAB DEPLOYMENT</span>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Autonomous Drink Pouring — Stretch RE3</h3>
-                <p class="card-sub">Northeastern University · Feb – Apr 2025</p>
-              </div>
-              <span class="card-status">FEB–APR 2025</span>
-            </div>
-            <p class="card-desc">Full perception‑to‑actuation pipeline for assistive liquid transfer: RGB‑D cup detection, 3D pose reprojection, TF2 transform to base_link, and incremental wrist‑roll pouring control — validated in a custom Gazebo world before hardware trials.</p>
-            <p class="stack-line"><b>Stack:</b> ROS2 Humble · MoveIt2 · YOLOv8n · RealSense D405 · TF2</p>
-            <div class="results">
-              <div class="result"><span class="num">90%</span><span class="lbl">task success</span></div>
-              <div class="result"><span class="num">&lt;40ms</span><span class="lbl">frame→actuation latency</span></div>
-              <div class="result"><span class="num">±0.9cm</span><span class="lbl">depth error</span></div>
-              <div class="result"><span class="num">-30%</span><span class="lbl">response latency</span></div>
-            </div>
-            <div class="card-tags">
-              <span class="pill">ROS2</span><span class="pill">MoveIt2</span><span class="pill">Real‑to‑Sim</span><span class="pill">Assistive Robotics</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2 -->
-        <article class="card" data-cats="perception manipulation embedded">
-          <div class="card-media">
-            <img src="./assets/picker-arm.jpg" alt="Custom-built industrial picker arm with labeled servo motors and suction gripper" loading="lazy">
-            <span class="fig">FIG. 02 — 6‑DOF PICKER ARM, HARDWARE BUILD</span>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Industrial Picker Arm — Software/Mechanic Fusion</h3>
-                <p class="card-sub">University of Mumbai · Sep 2023 – Mar 2024 · <span style="color:var(--ok)">Published, IEEE ICNEWS 2024</span></p>
-              </div>
-              <span class="card-status pub">PUBLISHED</span>
-            </div>
-            <p class="card-desc">Built a 6‑servo robotic arm from scratch and fused it with a ROS + YOLOv8 vision stack for real‑time package detection, sorting, and placement using Kinect depth sensing and a Raspberry Pi 4 control node.</p>
-            <p class="stack-line"><b>Stack:</b> ROS · YOLOv8 · Kinect RGB‑D · Raspberry Pi 4 · PCA9685 PWM</p>
-            <div class="results">
-              <div class="result"><span class="num">93%</span><span class="lbl">pick &amp; place success</span></div>
-              <div class="result"><span class="num">25Hz</span><span class="lbl">detection rate</span></div>
-              <div class="result"><span class="num">±2mm</span><span class="lbl">depth accuracy @1m</span></div>
-              <div class="result"><span class="num">-35%</span><span class="lbl">classification errors</span></div>
-            </div>
-            <div class="card-tags">
-              <span class="pill">ROS</span><span class="pill">Computer Vision</span><span class="pill">Embedded Control</span>
-            </div>
-            <div class="card-links">
-              <a href="https://ieeexplore.ieee.org/document/10731029" target="_blank" rel="noopener">→ IEEE Publication</a>
-              <a href="https://youtu.be/ab31i-sO7LY" target="_blank" rel="noopener">→ Demo Video</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 1b -->
-        <article class="card no-photo" data-cats="embedded hri">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Assistive Braille Input Device — Firmware &amp; Embedded Systems</h3>
-                <p class="card-sub">Tatum Robotics · Jan – May 2026</p>
-              </div>
-              <span class="card-status ongoing">PRE-LAUNCH</span>
-            </div>
-            <p class="card-desc">Firmware for a chorded Braille keyboard that lets blind/low‑vision users type on any computer with zero custom drivers. Designed a hardware‑agnostic chording state machine decoding asynchronous multi‑key presses into full Grade 1/2 (contracted) Unified English Braille, output over USB HID as standard keystrokes. Root‑caused and fixed an intermittent I2C bus failure on the custom PCB, tracing it to insufficient pull‑up resistance and validating the fix via register‑level testing. Product is unreleased, so specifics here are limited to what's publicly shareable.</p>
-            <p class="stack-line"><b>Stack:</b> CircuitPython · adafruit_hid · MCP23017 I2C GPIO Expander · Custom PCB</p>
-            <div class="card-tags">
-              <span class="pill">Embedded Firmware</span><span class="pill">I2C / Hardware Debug</span><span class="pill">USB HID</span><span class="pill">Assistive Tech</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3 -->
-        <article class="card no-photo" data-cats="slam">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">riSAM — Robust Incremental Smoothing &amp; Mapping</h3>
-                <p class="card-sub">Northeastern University · Sep – Dec 2024</p>
-              </div>
-              <span class="card-status">SEP–DEC 2024</span>
-            </div>
-            <p class="card-desc">Implemented a full riSAM pose‑graph pipeline from factor‑graph fundamentals, using GNC and a SIG kernel for outlier rejection. Benchmarked incremental vs. batch optimization on MIT CSAIL, Manhattan, and Intel datasets under injected drift and corner noise.</p>
-            <p class="stack-line"><b>Stack:</b> Python · Factor Graphs · Trust‑Region Optimization · Pose‑Graph SLAM</p>
-            <div class="results">
-              <div class="result"><span class="num">~80%</span><span class="lbl">trajectory error reduction</span></div>
-              <div class="result"><span class="num">-15%</span><span class="lbl">localization drift</span></div>
-              <div class="result"><span class="num">+15%</span><span class="lbl">optimization efficiency</span></div>
-            </div>
-            <div class="card-tags">
-              <span class="pill">SLAM</span><span class="pill">Localization</span><span class="pill">State Estimation</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="card no-photo" data-cats="slam perception">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Current‑Aware Kalman Filter for AUV Navigation</h3>
-                <p class="card-sub">Northeastern University</p>
-              </div>
-            </div>
-            <p class="card-desc">Designed a full state‑space Kalman filter (A, H, Q, R, P) fusing GPS, DVL, and modeled ocean‑current dynamics to produce stable real‑time position and velocity estimates for an autonomous underwater vehicle under noisy, disturbed conditions.</p>
-            <p class="stack-line"><b>Stack:</b> Python · NumPy · Matplotlib · Kalman Filtering · Sensor Fusion</p>
-            <div class="results">
-              <div class="result"><span class="num">0.00039s</span><span class="lbl">compute time / step</span></div>
-              <div class="result"><span class="num">6‑dim</span><span class="lbl">state‑space model</span></div>
-            </div>
-            <div class="card-tags">
-              <span class="pill">Kalman Filtering</span><span class="pill">Sensor Fusion</span><span class="pill">Navigation</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="card no-photo" data-cats="hri embedded">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Doppler‑Based Directional Awareness Wearable</h3>
-                <p class="card-sub">Northeastern University · Sep – Dec 2025</p>
-              </div>
-              <span class="card-status ongoing">ONGOING</span>
-            </div>
-            <p class="card-desc">A wrist‑worn sound‑localization system to help hearing‑impaired users detect the direction and motion of car horns. Combines multi‑microphone TDOA estimation, GCC‑PHAT cross‑correlation, and Doppler shift analysis to classify oncoming vs. receding vehicles.</p>
-            <p class="stack-line"><b>Stack:</b> Python · MATLAB · FFT · GCC‑PHAT · TDOA Estimation</p>
-            <div class="results">
-              <div class="result"><span class="num">±10°</span><span class="lbl">direction accuracy</span></div>
-              <div class="result"><span class="num">&lt;100ms</span><span class="lbl">response time</span></div>
-            </div>
-            <div class="card-tags">
-              <span class="pill">Assistive Tech</span><span class="pill">Audio DSP</span><span class="pill">Wearables</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="card no-photo" data-cats="hri">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">HRI Study — Speed × Object Type on Handover Perception</h3>
-                <p class="card-sub">Northeastern University</p>
-              </div>
-              <span class="card-status ongoing">ONGOING</span>
-            </div>
-            <p class="card-desc">A 6‑condition user study (3 speeds × 2 object types) examining how a robot's approach speed and the object it hands over affect perceived safety, comfort, and predictability during robot‑to‑human handovers, using a Trossen robotic arm.</p>
-            <p class="stack-line"><b>Stack:</b> Trossen Arm · Experimental Design · 7‑point Perception Scales</p>
-            <div class="card-tags">
-              <span class="pill">Human‑Robot Interaction</span><span class="pill">User Studies</span><span class="pill">Safety Perception</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="card no-photo" data-cats="embedded">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Sun‑Tracking Solar Panel</h3>
-                <p class="card-sub">University of Mumbai</p>
-              </div>
-            </div>
-            <p class="card-desc">Arduino‑driven dual‑LDR feedback loop that rotates a solar panel toward the brighter of two light sensors via a servo, keeping the panel perpendicular to the sun through morning, noon, and evening.</p>
-            <p class="stack-line"><b>Stack:</b> Arduino Uno · Servo.h · LDR Voltage Dividers</p>
-            <div class="card-tags">
-              <span class="pill">Embedded Systems</span><span class="pill">Control</span><span class="pill">Arduino</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8 -->
-        <article class="card no-photo" data-cats="embedded">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Fire Security Alarm System (IoT)</h3>
-                <p class="card-sub">University of Mumbai</p>
-              </div>
-            </div>
-            <p class="card-desc">An ESP8266‑based fire detection system combining an MQ2 gas sensor and flame sensor to trigger a local buzzer/LED alarm and push real‑time notifications over Wi‑Fi via the Blynk app — built for continuous 24/7 monitoring.</p>
-            <p class="stack-line"><b>Stack:</b> NodeMCU ESP8266 · MQ2 Sensor · Flame Sensor · Blynk IoT</p>
-            <div class="card-tags">
-              <span class="pill">IoT</span><span class="pill">Embedded Systems</span><span class="pill">Real‑Time Alerts</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9 -->
-        <article class="card" data-cats="embedded">
-          <div class="card-media diagram">
-            <img src="./assets/quadcopter.jpg" alt="Fully assembled quadcopter drone with four brushless motors and flight controller" loading="lazy" style="object-fit:contain;">
-            <span class="fig">FIG. 03 — QUADCOPTER, ASSEMBLED UNIT</span>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Fabrication of a Quadcopter Drone</h3>
-                <p class="card-sub">University of Mumbai</p>
-              </div>
-            </div>
-            <p class="card-desc">Designed and built a UAV from scratch — brushless motors, ESCs, and a KK 2.1.5 flight controller — and programmed ATmega16 firmware with PID‑based stabilization for takeoff, landing, and multi‑axis manual flight over a 6‑channel RC link.</p>
-            <p class="stack-line"><b>Stack:</b> ATmega16 · KK 2.1.5 FC · ESC Calibration · BLDC Motor Control</p>
-            <div class="card-tags">
-              <span class="pill">UAV Mechanics</span><span class="pill">Controls</span><span class="pill">Embedded Firmware</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 10 -->
-        <article class="card no-photo" data-cats="perception">
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Operations on Signals Using MATLAB</h3>
-                <p class="card-sub">University of Mumbai</p>
-              </div>
-            </div>
-            <p class="card-desc">Vectorized MATLAB implementations of core discrete‑time signal operations — addition, subtraction, multiplication, time‑reversal, shifting, and even/odd decomposition — verified with stem‑plot visualizations.</p>
-            <p class="stack-line"><b>Stack:</b> MATLAB · Vector/Matrix Manipulation · Stem Plotting</p>
-            <div class="card-tags">
-              <span class="pill">Signal Processing</span><span class="pill">DSP Fundamentals</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 11 -->
-        <article class="card" data-cats="embedded">
-          <div class="card-media">
-            <img src="./assets/clap-switch.jpg" alt="Sound-activated clap switch circuit built and soldered on PCB" loading="lazy">
-            <span class="fig">FIG. 04 — CLAP SWITCH, PCB BUILD</span>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div>
-                <h3 class="card-title">Sound‑Activated Home Automation Clap Switch</h3>
-                <p class="card-sub">University of Mumbai</p>
-              </div>
-            </div>
-            <p class="card-desc">A low‑cost clap‑detection circuit — microphone → IC 741 amplifier → CD4017 decade counter — that toggles LEDs or appliances on/off, taken from breadboard prototype to a soldered PCB.</p>
-            <p class="stack-line"><b>Stack:</b> IC 741 · CD4017 · BC547 · Analog Electronics</p>
-            <div class="card-tags">
-              <span class="pill">Analog Electronics</span><span class="pill">PCB Prototyping</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 EXPERIENCE -->
+  <!-- 03 EXPERIENCE -->
   <section id="experience">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-num">§04</span>
+        <span class="sec-num">§03</span>
         <span class="sec-title">Experience</span>
         <span class="sec-rule"></span>
       </div>
       <div class="timeline reveal">
         <div class="tl-item">
-          <div class="tl-date">JAN 2026 — MAY 2026</div>
+          <div class="tl-date">JAN 2026 – MAY 2026</div>
           <div class="tl-role">Hardware &amp; Embedded Systems Intern <span class="card-status ongoing" style="margin-left:8px;">PRE-LAUNCH</span></div>
-          <div class="tl-org">Tatum Robotics, Boston, MA · Product unreleased — details limited to publicly shareable scope</div>
+          <div class="tl-org">Tatum Robotics, Boston, MA · Product hasn't shipped yet, so details here are limited to publicly shareable scope</div>
           <ul>
-            <li>Designed firmware for an assistive Braille input device translating chorded keypresses into standard USB keyboard output — see <a href="#projects">Braille Input Device</a> below.</li>
+            <li>Designed firmware for an assistive Braille input device translating chorded keypresses into standard USB keyboard output. See the Braille Input Device project below for more.</li>
             <li>Diagnosed and resolved an intermittent I2C communication failure on a custom PCB by root‑causing insufficient pull‑up resistance, validating the fix via bus‑scan and register‑level testing.</li>
             <li>Authored a formal technical report documenting system architecture and handoff notes for future contributors.</li>
           </ul>
         </div>
         <div class="tl-item">
-          <div class="tl-date">JUN 2022 — MAR 2023</div>
+          <div class="tl-date">JUN 2022 – MAR 2023</div>
           <div class="tl-role">Industrial Automation Intern</div>
           <div class="tl-org">K R Petroleum, Mumbai, India</div>
           <ul>
             <li>Developed PLC control logic for pump systems; built Python/SQL pipelines for predictive maintenance, cutting downtime 15%.</li>
-            <li>Integrated flow/level sensors with automation logic — 12% accuracy improvement, 40% less manual intervention.</li>
+            <li>Integrated flow/level sensors with automation logic, improving accuracy by 12% and cutting manual intervention by 40%.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PUBLICATION -->
+  <!-- 04 PUBLICATION -->
   <section id="publication">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-num">§05</span>
+        <span class="sec-num">§04</span>
         <span class="sec-title">Publication</span>
         <span class="sec-rule"></span>
       </div>
@@ -895,13 +760,143 @@
     </div>
   </section>
 
+  <!-- 05 PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§05</span>
+        <span class="sec-title">Projects</span>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="filters reveal" role="group" aria-label="Filter projects by category">
+        <button class="tag active" data-filter="all">ALL (13)</button>
+        <button class="tag" data-filter="perception">PERCEPTION</button>
+        <button class="tag" data-filter="slam">SLAM &amp; STATE EST.</button>
+        <button class="tag" data-filter="manipulation">MANIPULATION</button>
+        <button class="tag" data-filter="embedded">EMBEDDED / IOT</button>
+        <button class="tag" data-filter="hri">HRI / ASSISTIVE</button>
+        <button class="tag" data-filter="controls">CONTROLS &amp; DYNAMICS</button>
+        <button class="tag signature-tag" data-filter="signature">★ SIGNATURE WORK</button>
+      </div>
+
+      <div class="projects reveal" id="project-list"></div>
+      <p class="img-help">Adding a photo for any project: save it as <code>project-01.jpg</code> (matching the project's number below) and drop it into the <code>assets</code> folder. It appears automatically.</p>
+    </div>
+  </section>
+
+  <!-- project detail modal -->
+  <div id="project-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="Close">✕</button>
+      <div class="modal-media">
+        <img id="modal-img" src="" alt="" loading="lazy">
+        <div class="media-fallback" id="modal-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      </div>
+      <div class="modal-body">
+        <div class="card-top">
+          <div>
+            <h3 class="card-title" id="modal-title"></h3>
+            <p class="card-sub" id="modal-sub"></p>
+          </div>
+          <span class="card-status" id="modal-status"></span>
+        </div>
+        <p class="card-desc" id="modal-desc"></p>
+        <p class="stack-line" id="modal-stack"></p>
+        <div class="results" id="modal-results"></div>
+        <div class="card-tags" id="modal-tags"></div>
+        <div class="card-links" id="modal-links"></div>
+        <div id="modal-deepdive"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 BEYOND THE LAB -->
+  <section id="beyond">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">§06</span>
+        <span class="sec-title">Beyond the Lab</span>
+        <span class="sec-rule"></span>
+      </div>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="beyond-photo">
+            <img src="./assets/beyond-hackathon.jpg" alt="Hackathon" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4z"/><path d="M7 6H4a2 2 0 002 4M17 6h3a2 2 0 01-2 4"/></svg>
+          </div>
+          <h3>Hackathons</h3>
+          <ul class="mini-list">
+            <li><b>Flipkart Grid Hackathon</b> (2023): proposed and built the object‑detection ML model for an industrial sorting arm; team passed Level 1</li>
+            <li><b>Smart India Hackathon</b> (2023): led the team pitching a QR‑based automatic medicine dispenser</li>
+            <li><b>Kavach 2023</b>: presented a mesh‑network detection concept for flagging apps used to evade cellular monitoring</li>
+            <li><b>Tata Crucible Hackathon</b> (2022): presented an accurate headcount system to speed up emergency response</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="beyond-photo">
+            <img src="./assets/beyond-leadership.jpg" alt="GWISE leadership" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/><path d="M17 3.5a4 4 0 010 7"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
+          </div>
+          <h3>Leadership</h3>
+          <ul class="mini-list">
+            <li><b>Media &amp; Communications Chair</b>, Northeastern GWISE (Jun–Dec 2025): led digital presence and technical communications for Graduate Women in Science and Engineering, managing the website and social media strategy</li>
+            <li><b>Technical Event Lead</b>, IETE Students Forum (2023): led an EXTC‑focused technical event, handling planning, PR, promotional design, and judging</li>
+            <li><b>Soft Skills Project Lead</b> (2023): led a team through a simulated product‑launch exercise focused on communication and teamwork</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="beyond-photo">
+            <img src="./assets/beyond-volunteering.jpg" alt="Community Servings volunteering" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          </div>
+          <h3>Volunteering</h3>
+          <ul class="mini-list">
+            <li><b>Community Servings</b>, Boston, MA: volunteer preparing and packing medically tailored meals for people managing critical illnesses</li>
+            <li><b>National Service Scheme (NSS)</b>, 2022–2024: community education &amp; social‑welfare campaigns, designed outreach graphics, mentored underprivileged students</li>
+            <li><b>COVID‑19 food distribution</b> with NGO NSJ: delivered food to underprivileged families during the pandemic</li>
+            <li><b>Swachh Bharat Abhiyan</b>: school‑organized street clean‑up drive</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="beyond-photo">
+            <img src="./assets/beyond-dance.jpg" alt="Dance performance" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+            <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Dance &amp; Arts</h3>
+          <ul class="mini-list">
+            <li>Hip‑hop and multi‑style dancer for several years</li>
+            <li>Performed at the <b>International Children's Festival</b> and <b>Kpop India Dance Contest</b></li>
+            <li>Multiple <b>solo competition wins</b>; led a dance team through choreography and event coordination</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<!-- 06 CONTACT / ORDERING INFO -->
+<!-- 07 CONTACT / ORDERING INFO -->
 <footer id="contact">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">§06</span>
+      <span class="sec-num">§07</span>
       <span class="sec-title">Contact</span>
       <span class="sec-rule"></span>
     </div>
@@ -914,7 +909,7 @@
           <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13c0-2.2 1.8-4 4-4s4 1.8 4 4v8"/></svg></span> <a href="https://www.linkedin.com/in/anushkachauhan639721/" target="_blank" rel="noopener">/anushkachauhan639721</a></li>
           <li><span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span> <a href="./assets/Anushka_Chauhan_Resume.pdf" download>Download Résumé (PDF)</a></li>
         </ul>
-        <p class="foot-note">© 2026 Anushka Pradeep Chauhan. Built as a static site — deploy freely via GitHub Pages.</p>
+        <p class="foot-note">© 2026 Anushka Pradeep Chauhan. Built as a static site, free to deploy via GitHub Pages.</p>
       </div>
       <div class="form-card">
         <p class="form-title">Send a message</p>
@@ -924,7 +919,7 @@
           <input type="text" name="company" placeholder="Company / role (optional)">
           <textarea name="message" placeholder="Message" required></textarea>
           <button class="btn" type="submit" style="align-self:flex-start;">Send Message →</button>
-          <p class="form-note">Form delivers straight to Anushka's inbox — no backend required.</p>
+          <p class="form-note">Form delivers straight to my inbox, no backend required.</p>
         </form>
       </div>
     </div>
@@ -932,6 +927,413 @@
 </footer>
 
 <script>
+  // ---------- Project data ----------
+  // To add a photo: save it as project-XX.jpg (matching the "img" number below) into /assets.
+  const PROJECTS = [
+    { img:"project-01", cats:"perception manipulation signature",
+      title:"Autonomous Drink Pouring: Stretch RE3", org:"Northeastern University · Feb – Apr 2025",
+      status:"FEB–APR 2025", statusClass:"",
+      teaser:"A perception-to-actuation pipeline that lets a robot arm autonomously pour a drink, from cup detection to a steady pour.",
+      desc:"Full perception‑to‑actuation pipeline for assistive liquid transfer: RGB‑D cup detection, 3D pose reprojection, TF2 transform to base_link, and incremental wrist‑roll pouring control, validated in a custom Gazebo world before hardware trials.",
+      stack:"ROS2 Humble · MoveIt2 · YOLOv5n · ArUco · RealSense D405/D435 · TF2",
+      results:[["90%","task success"],["<40ms","frame→actuation latency"],["±0.9cm","depth error"],["-30%","response latency"]],
+      tags:["ROS2","MoveIt2","Real‑to‑Sim","Assistive Robotics"], links:[],
+      deepDive:{
+        course:"CS5335, Robot Science and Systems, Northeastern University",
+        team:"Team CyberGrip, 4‑person team",
+        gallery:[
+          {img:"project-01-sim", cap:"Gazebo simulation world (table + cup meshes) used to validate the perception‑to‑control pipeline before touching hardware."},
+          {img:"project-01-grip", cap:"Gripper‑mounted RealSense D405 tracking the ArUco marker on the source cup during a live grasp."},
+          {img:"project-01-terminal", cap:"Live ROS2 log: the YOLOv5n cup detector publishing 3D coordinates in real time to /tmp/cup_position.yaml."}
+        ],
+        architectureImg:"project-01-flowchart",
+        sections:[
+          { label:"Perception System", html:"The source cup is localized through ArUco fiducial tracking on the gripper‑mounted RealSense D405: the marker pose is extracted, converted to a 3D point using the depth value, and transformed into the robot's base_link frame via ROS2 TF2. The destination cup is found by a YOLOv5n model (1.9M parameters, chosen for low latency) running on the head‑mounted D435's RGB stream at 640×640, with inference at roughly 25–30ms per frame on the Stretch RE3's onboard processor. Camera intrinsics (fx, fy, cx, cy) are pulled once from /camera/color/camera_info and used to reproject the YOLO bounding‑box centroid into a real‑world 3D point. That point is transformed into base_link, filtered on depth validity and detection confidence, smoothed with a rolling average across frames, and written to a YAML file that the motion planner reads." },
+          { label:"Motion Control & Pouring Logic", html:"Navigation starts with obstacle‑aware forward traversal: a 40×40 pixel center crop of the depth stream estimates distance to the nearest obstacle, and the robot halts and rotates 90° if anything is closer than 1.5m. Grasping the source cup uses sequential lift/arm/wrist control against the ArUco‑derived pose, with a ±0.7 radian wrist‑roll perturbation applied before and after contact to correct rotational misalignment and improve grip robustness. The destination pose is clamped to a safe working envelope (arm 0.2–0.6m, lift 0.4–1.0m, lateral ±0.3m) before the robot translates into position and pours via an incrementally rolled wrist joint, with pour angle and rate tuned empirically to avoid splashing." },
+          { label:"Testing & Results", html:"We validated the full pipeline in Gazebo first, using the stretch_gz_sim environment with a custom table‑and‑cup world, to debug transform timing and sensor lag without hardware risk. Real hardware testing followed with RViz for TF/perception monitoring, rqt_plot for motor states, and rqt_graph/TF Echo for topic and frame validation. Across 10 real‑world trials, the system grasped and poured successfully 8 times; the other 2 had minor wrist misalignment that caused a positional offset but no spillage." }
+        ],
+        challenges:[
+          "Untangled a broken sim setup caused by mismatched Stretch3 GitHub forks (missing URDFs, broken mesh paths) by re‑cloning the official Hello Robot repo instead of patching the broken one.",
+          "Diagnosed that Gazebo's source‑vs‑binary install type silently changed whether gz or ign commands controlled the joints, and standardized the team's environment around it.",
+          "Fixed recurring colcon build failures traced to the stretch_funmap package by excluding it (and stretch_gz_sim on hardware) via --packages-ignore.",
+          "Found that grasp behavior was physically unrealistic in simulation until proper physics/dynamics plugins were added to the custom Gazebo world.",
+          "Resolved intermittent gripper stalls/overload errors through a detach‑rotate‑reattach‑then‑dynamixel‑reboot sequence, and modified keyboard_teleop.py to expose gripper‑roll control for manual testing before automating it.",
+          "Improved ArUco reliability under poor lighting/off‑angle views by tuning the head pan/tilt to keep the marker centered, and stabilized YOLO output by filtering low‑confidence frames and adding temporal smoothing."
+        ],
+        limitations:[
+          "Marker dependence: ArUco limits flexibility; a keypoint‑matching or vision‑transformer‑based detector would remove the need for a fiducial marker.",
+          "Open‑loop pouring: the tilt trajectory isn't monitored during the pour; IMU or visual liquid‑tracking feedback would enable closed‑loop correction.",
+          "Static‑scene assumption: the pipeline assumes objects don't move mid‑task; visual servoing and online re‑planning would add robustness to drift.",
+          "Fixed grasp parameters: gripper width and pressure are constant; torque sensing and deformable‑object modeling would improve compliance across cup types.",
+          "Proposed next step: use reinforcement learning (PPO/SAC) in simulation to optimize the wrist‑roll pour profile across different cup shapes and liquid dynamics."
+        ]
+      } },
+
+    { img:"project-02", cats:"embedded hri signature",
+      title:"Assistive Braille Input Device: Firmware &amp; Embedded Systems", org:"Tatum Robotics · Jan – May 2026",
+      status:"PRE-LAUNCH", statusClass:"ongoing",
+      teaser:"Firmware for a chorded Braille keyboard that types on any computer with zero custom drivers.",
+      desc:"Firmware for a chorded Braille keyboard that lets blind/low‑vision users type on any computer with zero custom drivers. Designed a hardware‑agnostic chording state machine decoding asynchronous multi‑key presses into full Grade 1/2 (contracted) Unified English Braille, output over USB HID as standard keystrokes. Root‑caused and fixed an intermittent I2C bus failure on the custom PCB, tracing it to insufficient pull‑up resistance and validating the fix via register‑level testing. This product hadn't shipped as of my internship, so details here are limited to what's publicly shareable.",
+      stack:"CircuitPython · adafruit_hid · MCP23017 I2C GPIO Expander · Custom PCB",
+      results:[], tags:["Embedded Firmware","I2C / Hardware Debug","USB HID","Assistive Tech"], links:[] },
+
+    { img:"project-03", cats:"perception manipulation embedded",
+      title:"Industrial Picker Arm: Software/Mechanic Fusion", org:"University of Mumbai · Sep 2023 – Mar 2024",
+      status:"PUBLISHED", statusClass:"pub",
+      teaser:"A 6-servo arm fused with a ROS vision stack to detect, sort, and place packages in real time. Published at IEEE ICNEWS.",
+      desc:"Built a 6‑servo robotic arm from scratch and fused it with a ROS + YOLOv8 vision stack for real‑time package detection, sorting, and placement using Kinect depth sensing and a Raspberry Pi 4 control node.",
+      stack:"ROS · YOLOv8 · Kinect RGB‑D · Raspberry Pi 4 · PCA9685 PWM",
+      results:[["93%","pick &amp; place success"],["25Hz","detection rate"],["±2mm","depth accuracy @1m"],["-35%","classification errors"]],
+      tags:["ROS","Computer Vision","Embedded Control"],
+      links:[["→ IEEE Publication","https://ieeexplore.ieee.org/document/10731029"],["→ Demo Video","https://youtu.be/ab31i-sO7LY"]],
+      deepDive:{
+        team:"Published, IEEE ICNEWS 2024: Rupali S. Patil, Aniket Apraj, Sahil Bhosale, Srushti Borikar, Anushka Pradeep Chauhan",
+        gallery:[
+          {img:"project-03-design", cap:"The arm's working envelope: a 360° hemisphere spanning a 50cm radius and 40cm depth."},
+          {img:"project-03-claw", cap:"Alternate PLA end effector: an 8cm/2cm open/close claw gripper delivering 5N grip force and a 500g lift capacity."},
+          {img:"project-03-flowchart", cap:"Full control loop: detect object, compute trajectory, pick, compute drop-off trajectory, place, and continue scanning until done."}
+        ],
+        sections:[
+          { label:"Mechanical Design", html:"The arm covers a 360° working hemisphere with a 50cm radius and 40cm depth. A 60kg‑torque servo drives shoulder motion across roughly 70° of freedom; two 25kg servos give the elbow about 60°; and two more servos at the wrist add 350° and 180° of freedom for fine manipulation. The end effector uses dual suction cups powered by two 1.39kPa air pumps, which grip via vacuum seal rather than mechanical clamping, alongside an alternate PLA claw design (8cm open, 2cm closed) rated for 5N of grip force and up to 500g of lift." },
+          { label:"Perception &amp; Vision Pipeline", html:"A YOLOv8 model was trained on roughly 2,000 labeled images spanning three package classes (small boxes, medium boxes, paper pouches), annotated using CVAT (Computer Vision Annotation Tool) to speed up bounding‑box labeling. A Kinect depth camera mounted on the arm extracts x, y, and z coordinates for each detected package using time‑of‑flight depth sensing, and a Raspberry Pi receives those coordinates over ROS to drive the arm's pick‑and‑place motion." },
+          { label:"Control Flow", html:"The system initializes the arm and camera, then loops: capture a frame, detect an object, and if found, calculate a trajectory and move the arm to grasp it via the suction gripper. Once secured, it calculates a drop‑off trajectory to the correct zone, places the object, and checks for more objects before repeating, continuing until the workspace is clear." }
+        ],
+        limitations:[
+          "Trained on three package classes (small boxes, medium boxes, paper pouches); the paper notes that customizing the vision model per‑industry could meaningfully extend real‑world coverage.",
+          "Depth sensing relies on the Kinect's infrared time‑of‑flight sensor, which is a known limitation for outdoor or bright‑light deployments."
+        ]
+      } },
+
+    { img:"project-04", cats:"slam",
+      title:"riSAM: Robust Incremental Smoothing &amp; Mapping", org:"Northeastern University, Robotics Program",
+      status:"", statusClass:"",
+      teaser:"A robust SLAM pipeline that filters out sensor noise and outliers to keep a robot's map accurate.",
+      desc:"Implemented a full riSAM pose‑graph pipeline from factor‑graph fundamentals, using Graduated Non‑Convexity and a Scale‑Invariant Graduated kernel for outlier rejection, plus trust‑region optimization for stability. Benchmarked incremental vs. batch optimization on a simulated square path, MIT CSAIL, Manhattan, and Intel datasets under injected drift and corner noise.",
+      stack:"Python · Factor Graphs · GNC · SIG Kernel · Trust‑Region Optimization",
+      results:[["-80%","trajectory error (corner noise)"],["-50%","runtime vs. batch processing"],["40%","outlier tolerance maintained"]],
+      tags:["SLAM","Localization","State Estimation"], links:[],
+      deepDive:{
+        team:"Team of 3: Sasha Oswald, Anjaly Roy, Anushka Pradeep Chauhan (pose‑graph optimization)",
+        architectureImg:"project-04-diagram",
+        gallery:[
+          {img:"project-04-manhattan", cap:"riSAM applied to the Manhattan dataset: dense loop closures and sharp turns, with outliers rejected while preserving loop‑closure accuracy."},
+          {img:"project-04-runtime", cap:"Runtime comparison: incremental optimization (green) scales gradually per iteration, versus the fixed high cost of full batch reprocessing (orange)."}
+        ],
+        sections:[
+          { label:"How riSAM Works", html:"riSAM layers four techniques on top of standard pose‑graph SLAM. Graduated Non‑Convexity (GNC) starts the optimization as an easy convex problem and gradually reintroduces non‑convexity, steering the solution toward the global optimum instead of an outlier‑induced local one. A Scale‑Invariant Graduated (SIG) kernel then reweights residuals so it performs consistently whether sensor noise is small or large, rather than needing to be re‑tuned per sensor. Incremental updates mean only the subgraph affected by new measurements gets re‑optimized, not the whole map, and trust‑region optimization keeps each update step inside a radius where the local approximation is still valid, adjusting that radius based on how well each step actually performed." },
+          { label:"Validation Across Datasets", html:"On a simulated square‑path dataset with noise injected at the corners, riSAM cut corner‑specific trajectory error by roughly 80%, converging from a 0.007 mean error down to about 0.001 over 10 iterations. Stress‑testing against outlier percentages from 0–50% showed the optimized trajectory's error stayed low even at 50% outliers, while the unoptimized error climbed steadily, and riSAM held up well through the tested range up to 40% outliers. Against real‑world datasets, it adjusted successfully to MIT CSAIL's dynamic, complex trajectories, preserved precise loop closures on the Manhattan dataset despite dense turns, and maintained map consistency on the larger, more complex Intel dataset. Compared to batch processing, incremental updates cut runtime by about 50%, which is what makes the approach viable for real‑time SLAM." }
+        ],
+        limitations:[
+          "The algorithm's performance depends on user‑defined parameters that can shift results across different scenarios, and computational cost still rises under extreme outlier conditions.",
+          "Proposed next step: validate riSAM on an actual robot (e.g. a TurtleBot) rather than only simulated and offline datasets.",
+          "Proposed extension: adapt the approach for multi‑robot, collaborative SLAM settings.",
+          "Proposed improvement: automate parameter tuning to reduce reliance on manual configuration, and add more adaptive outlier‑robust kernels for extreme noise conditions."
+        ]
+      } },
+
+    { img:"project-05", cats:"slam perception",
+      title:"Current‑Aware Kalman Filter for AUV Navigation", org:"Northeastern University, Robotics Program",
+      status:"", statusClass:"",
+      teaser:"A Kalman filter that fuses GPS, DVL, and ocean-current models to keep an underwater vehicle on course.",
+      desc:"Designed a full state‑space Kalman filter (A, H, Q, R, P) fusing GPS, DVL, and modeled ocean‑current dynamics to produce real‑time position and velocity estimates for an autonomous underwater vehicle under noisy, disturbed conditions, then diagnosed which error sources limited its accuracy.",
+      stack:"Python · NumPy · Matplotlib · Kalman Filtering · Sensor Fusion",
+      results:[["0.00039s","compute time / step"],["6‑dim","state‑space model"],["4.79m","position RMSE"],["12.88 m/s","velocity MAE"]],
+      tags:["Kalman Filtering","Sensor Fusion","Navigation"], links:[],
+      deepDive:{
+        team:"Team of 4: Sreemayi Kompella, Chaitanya Prashant Salve, Chandra Patel, Anushka Pradeep Chauhan",
+        gallery:[
+          {img:"project-05-code", cap:"State transition, process‑noise, and measurement‑noise matrices (A, Q, R) defining the 6‑dimensional filter."},
+          {img:"project-05-velocity", cap:"Filtered vs. unfiltered velocity estimates: the Kalman filter smooths noisy raw DVL readings into a stable trend."}
+        ],
+        sections:[
+          { label:"Kalman Filter Framework", html:"The filter runs two phases per step: prediction, which advances the state estimate using the current‑aware motion model, and update, which corrects that prediction against incoming GPS and DVL measurements. Five parameter matrices define its behavior: the state transition matrix (A) models vehicle motion including current effects, process noise (Q) captures uncertainty in that prediction, measurement noise (R) reflects how much to trust noisy GPS/DVL readings, initial uncertainty (P) sets starting confidence, and the measurement matrix (H) links raw sensor observations back to the 6‑dimensional state vector." },
+          { label:"Results, Honestly Interpreted", html:"Velocity estimates were solid: a MAE of 12.88 m/s and RMSE of 15.47 m/s against ground truth, reasonable given how frequently DVL updates arrive and how smoothly velocity tends to evolve. Position estimates were noticeably weaker (RMSE 4.79m, MAE 3.86m), and the honest read is that the likely causes are infrequent or noisy GPS updates, and process/measurement noise matrices (Q/R) that weren't fully tuned to match the real sensor characteristics, rather than a flaw in the filtering approach itself. The framework was fast either way, completing 98 steps in 0.0382 seconds, an average of 0.00039s per step, well within real‑time requirements." }
+        ],
+        limitations:[
+          "Position accuracy (4.79m RMSE) trailed velocity accuracy, most likely from GPS update frequency/noise and Q/R tuning rather than the underlying filter design.",
+          "Proposed next step: integrate additional sensor modalities beyond GPS and DVL to constrain position drift further.",
+          "Proposed extension: generalize the framework to handle non‑linear AUV dynamics (e.g. via an Extended or Unscented Kalman Filter)."
+        ]
+      } },
+
+    { img:"project-06", cats:"hri embedded signature",
+      title:"Doppler‑Based Directional Awareness Wearable", org:"EECE 5552, Assistive Robotics, Northeastern University",
+      status:"SIM VALIDATED", statusClass:"ongoing",
+      teaser:"A wrist-worn device that tells hearing-impaired users which direction a car horn is coming from.",
+      desc:"A wearable \"digital ear\" for the 430 million people worldwide with disabling hearing loss: combines microphone‑array triangulation (GCC‑PHAT/TDOA) with Doppler shift analysis to identify emergency sounds, pinpoint their direction, and determine whether they're approaching, validated against both synthetic data and real police‑siren recordings.",
+      stack:"Python · MATLAB · FFT/STFT · GCC‑PHAT · TDOA · 4‑Mic Array Simulation",
+      results:[["±10°","direction accuracy beyond 10m"],["0.13°","best‑case error, 4‑mic array"],["<100ms","detection‑to‑alert latency"],["430M","people with disabling hearing loss worldwide"]],
+      tags:["Assistive Tech","Audio DSP","Wearables"], links:[],
+      deepDive:{
+        team:"Team of 4: Dhyey Mistry, Anushka Pradeep Chauhan, Athmavidya Venkataraman, Siddhi More",
+        architectureImg:"project-06-arch",
+        gallery:[
+          {img:"project-06-triangulation", cap:"Virtual microphone array simulation: geometry, simulated signals, GCC‑PHAT cross‑correlation, and resulting direction estimate."},
+          {img:"project-06-doppler", cap:"Real‑world validation on a police siren recording: adaptive energy threshold and dominant‑frequency tracker correctly classify Approaching → Receding."},
+          {img:"project-06-hardware", cap:"Proposed hardware form factors: a 4‑MEMS‑microphone wristwatch prototype and a headphone‑based alternative, both with haptic feedback."}
+        ],
+        sections:[
+          { label:"Sound Identification", html:"Before any spatial analysis, the system has to confirm a sound is actually worth reacting to, filtering out wind and speech. Raw audio is converted to mono, amplitude‑normalized, and smoothed, then converted to the frequency domain via Short‑Time FFT in 90ms frames. Car horns are detected as high‑energy spikes in the 505–516 Hz band; sirens use similar band‑pass logic across their sweeping 400–1300 Hz range. A peak‑detection step confirms a valid alert only when energy in the target band clears a dynamic threshold." },
+          { label:"Source Localization: TDOA + GCC‑PHAT", html:"Direction of arrival is computed via multilateration across a microphone array. Rather than basic cross‑correlation, which produces false peaks in noisy, reverberant outdoor environments, the system uses Generalized Cross‑Correlation with Phase Transform (GCC‑PHAT), which flattens the amplitude spectrum so the delay estimate relies on phase alone, making it resistant to echo and noise. We validated this against a virtual multi‑microphone array in MATLAB across several geometries before considering hardware. Array size mattered enormously: 2 microphones proved mathematically unsolvable (180° ambiguity), 3 microphones reached about 0.5° error, and a 4‑microphone square array delivered the best result at 0.13° error, with diminishing returns beyond 4 mics. Spacing also mattered: 10–20mm spacing gave 20–26° error (too coarse for safety use), while 30–40mm (a wrist‑worn form factor) brought that down to 17–19°." },
+          { label:"Motion Analysis: The Doppler Layer", html:"TDOA alone tells you where a sound is, not whether it's a threat in motion. To add that, the signal is bandpass‑filtered to 400–1300 Hz, an adaptive energy threshold isolates the siren tone from background traffic, and FFT‑based tone tracking follows its dominant frequency across time windows. A polynomial curve fit smooths that frequency trace, and its slope reveals the physics directly: a positive slope means the source is approaching (compressed wavefronts), negative means receding, and the inflection point where the slope crosses zero marks the Closest Point of Approach. A synthetic Doppler generator (10–40 m/s, known ground truth) validated this before testing on real police‑siren recordings, where the system correctly tracked a full Approaching → Receding transition." }
+        ],
+        limitations:[
+          "Close‑range instability: triangulation accuracy degrades under 5 meters, since wavefronts reach the microphones almost simultaneously, making TDOA differences hard to distinguish from sampling noise.",
+          "Minimum viable spacing (30–40mm) constrains wrist‑worn industrial design and comfort, since 10–20mm spacing produces angular errors too high for safe navigation.",
+          "2D‑only: the current algorithm resolves azimuth but not elevation, which could matter in complex multi‑level urban environments.",
+          "Next steps identified: migrate from MATLAB/Python to an ESP32 microcontroller with a custom 4‑mic PCB, OLED display, and haptic motors; add IMU‑based sensor fusion to compensate for head/wrist rotation; and replace threshold‑based detection with a lightweight ML classifier for a wider range of urban sounds."
+        ]
+      } },
+
+    { img:"project-07", cats:"hri signature",
+      title:"HRI Study: Speed × Object Type on Handover Perception", org:"Northeastern University, Team PaceMakers",
+      status:"", statusClass:"",
+      teaser:"A user study (N=25) showing that a robot's \"safe speed\" depends entirely on what it's holding, not a fixed number.",
+      desc:"A within‑subjects study (3 speeds × 2 object types, 6 conditions, 25 participants) testing how a robot's approach speed and the object it hands over interact to shape perceived safety, comfort, and predictability during a robot‑to‑human handover, using a Trossen robotic arm with pre‑programmed motion profiles.",
+      stack:"Trossen Arm · Repeated‑Measures ANOVA · 7‑point Likert Scales · Behavioral Coding",
+      results:[["N=25","participants, within‑subjects"],["-58%","safety rating, best→worst condition"],["p&lt;0.001","speed × object interaction"],["η²=0.242","interaction effect size"]],
+      tags:["Human‑Robot Interaction","User Studies","Safety Perception"], links:[],
+      deepDive:{
+        team:"Team PaceMakers: Tanya Sanjay Batra, Neel Adke, Anushka Pradeep Chauhan",
+        sections:[
+          { label:"Study Design", html:"Each of 25 participants experienced all 6 conditions (3 speeds × 2 objects) in randomized order, a within‑subjects design chosen so individual differences in baseline comfort wouldn't confound the results. The three speeds, 6.7, 15, and 37.5 cm/s, weren't arbitrary: they were bounded by HRI safety literature (0.05–0.40 m/s), then refined through a dozen‑plus pilot tests with peers until each felt perceptually distinct rather than just numerically different. Objects were a realistic fake knife (sharp) and a plush teddy bear (soft), chosen as clear opposite ends of the perceived‑threat spectrum without any actual danger. After each trial, participants rated safety, comfort, predictability, and willingness to interact again on 7‑point scales, while we separately logged behavioral signals like leaning or stepping back." },
+          { label:"Key Finding", html:"The Speed × Object interaction was highly significant, F(2,56) = 8.94, p &lt; 0.001, η² = 0.242, confirming the core hypothesis: robot speed and object type don't act independently. The same 37.5 cm/s speed rated 4.33 (acceptable) when paired with the teddy bear, but 2.67 (below the 3.0 threshold associated with user rejection in applied robotics) when paired with the knife, a 58% relative drop for identical motion. Both main effects were independently large too: speed alone explained 55.4% of variance in safety ratings (η²=0.554), and object type alone explained 61.7% (η²=0.617). Behaviorally, the room's mood visibly shifted between conditions: participants leaned in and smiled during slow‑teddy trials, and tensed up, leaned back, or stepped away during fast‑knife trials." }
+        ],
+        challenges:[
+          "The study was originally designed around a LoCoBot; after weeks of setup we discovered it had a genuine hardware fault, not user error, and switched to a Trossen arm, costing about two weeks but ultimately giving more reliable, precise control.",
+          "Operationalizing \"fast\" and \"slow\" took real iteration: tested speeds from 3 cm/s (looked broken) to 50 cm/s (felt unsafe even to the team) before converging on three levels validated through pilot testing with peers.",
+          "Participants routinely broke protocol by reaching for the object despite instructions not to; rather than fighting this, we logged it as behavioral data, which ended up reinforcing the core finding rather than undermining it."
+        ],
+        limitations:[
+          "Relied on self‑reported comfort and observed behavior; physiological measures (heart rate, eye tracking) could validate subjective fear more objectively.",
+          "The robot's speed was fixed regardless of participant reaction; a computer‑vision‑driven system could detect a person backing away and adapt speed in real time.",
+          "All participants were university‑aged adults (24–28); findings may not generalize to older adults, children, or clinical populations."
+        ]
+      } },
+
+    { img:"project-08", cats:"embedded",
+      title:"Sun‑Tracking Solar Panel", org:"University of Mumbai",
+      status:"", statusClass:"",
+      teaser:"An Arduino-driven solar panel that follows the sun automatically using two light sensors.",
+      desc:"Arduino‑driven dual‑LDR feedback loop that rotates a solar panel toward the brighter of two light sensors via a servo, keeping the panel perpendicular to the sun through morning, noon, and evening.",
+      stack:"Arduino Uno · Servo.h · LDR Voltage Dividers",
+      results:[], tags:["Embedded Systems","Control","Arduino"], links:[],
+      deepDive:{
+        team:"Team of 4: Aniket Apraj, Sahil Bhosale, Srushti Borikar, Anushka Chauhan",
+        gallery:[
+          {img:"project-08-diagram", cap:"Tracking logic across the day: the panel tilts toward whichever LDR reads brighter as the sun moves from morning to noon to evening."},
+          {img:"project-08-circuit", cap:"Arduino wiring: two LDR voltage dividers feeding analog pins, driving a servo on a digital PWM pin."}
+        ],
+        sections:[
+          { label:"How It Tracks the Sun", html:"Two LDRs are mounted on opposite edges of the panel, each forming a voltage divider with a 10kΩ pull‑down resistor into the Arduino's analog pins. The Arduino continuously compares light intensity between them: when the right LDR reads brighter, the servo nudges the panel right, and vice versa. Over a full day this plays out physically, in the morning the east‑facing LDR reads brighter and the panel turns east, and by evening the pattern reverses as the sun moves west, keeping the panel roughly perpendicular to incoming sunlight without any scheduled or GPS‑based logic." },
+          { label:"Build Process", html:"The base was built from MDF board, with the servo mounted vertically and the solar panel attached to its horn via an L‑shaped bracket. The LDRs were glued to opposite edges of the panel itself so they'd experience the same directional light difference the panel does. Wiring was straightforward: each servo's signal line went to a PWM pin, power and ground to the Arduino's 5V rail, and the two photoresistor dividers into separate analog inputs." }
+        ]
+      } },
+
+    { img:"project-09", cats:"embedded",
+      title:"Fire Security Alarm System (IoT)", org:"University of Mumbai",
+      status:"", statusClass:"",
+      teaser:"An IoT fire detector that triggers a local alarm and phone notification the moment it senses smoke or flame.",
+      desc:"An ESP8266‑based fire detection system combining an MQ2 gas sensor and flame sensor to trigger a local buzzer/LED alarm and push real‑time notifications over Wi‑Fi via the Blynk app, built for continuous 24/7 monitoring.",
+      stack:"NodeMCU ESP8266 · MQ2 Sensor · Flame Sensor · Blynk IoT",
+      results:[], tags:["IoT","Embedded Systems","Real‑Time Alerts"], links:[],
+      deepDive:{
+        team:"Team of 4: Aniket Apraj, Sahil Bhosale, Srushti Borikar, Anushka Chauhan",
+        gallery:[
+          {img:"project-09-flow", cap:"System flow: MQ2 + flame sensor readings go to the ESP8266, which drives the buzzer/LED and pushes an email notification over Wi‑Fi."}
+        ],
+        sections:[
+          { label:"How It Works", html:"The MQ2 sensor detects smoke and combustible gas, while a separate flame sensor watches for fire directly, both feeding digital GPIO pins on an ESP8266 NodeMCU. When either sensor trips, the NodeMCU activates a local 5V buzzer and LED, and simultaneously pushes a notification through the Blynk IoT app so someone off‑site (a homeowner, or building manager) is alerted even if no one is present to hear the alarm." },
+          { label:"Build &amp; Test", html:"After wiring the NodeMCU, MQ2 sensor, flame sensor, buzzer, and a BC547 transistor per the circuit diagram, the board was authorized against the Blynk servers so the app could receive its notifications. The team then tested the full loop end‑to‑end: triggering the sensors, confirming the buzzer fired locally, and confirming the phone notification arrived." }
+        ]
+      } },
+
+    { img:"project-10", cats:"embedded",
+      title:"Fabrication of a Quadcopter Drone", org:"University of Mumbai",
+      status:"", statusClass:"",
+      teaser:"A UAV built from scratch, with motors, ESCs, and a flight controller, flying stable manual flight.",
+      desc:"Designed and built a UAV from scratch, with brushless motors, ESCs, and a KK 2.1.5 flight controller, and programmed ATmega16 firmware with PID‑based stabilization for takeoff, landing, and multi‑axis manual flight over a 6‑channel RC link.",
+      stack:"ATmega16 · KK 2.1.5 FC · ESC Calibration · BLDC Motor Control",
+      results:[], tags:["UAV Mechanics","Controls","Embedded Firmware"], links:[],
+      deepDive:{
+        team:"Team of 5: Pratik Jadhav, Yashashvi Devadiga, Somnath Dey, Anushka Chauhan, Sanesh Akhade",
+        gallery:[
+          {img:"project-10-fc", cap:"The KK 2.1.5 flight controller board, the stabilization core that reads inputs and commands all four motors."},
+          {img:"project-10-esc", cap:"Electronic Speed Controllers (ESCs), one per motor, translating flight-controller commands into precise motor speed changes."},
+          {img:"project-10-motion", cap:"Motor rotation diagram for lateral motion: opposite rotor pairs speed up or slow down together to bank the frame left or right."}
+        ],
+        sections:[
+          { label:"Hardware", html:"The build centers on a KK 2.1.5 flight controller, four brushless DC motors each paired with its own ESC, four propellers, a battery, and a 6‑channel RC receiver/transmitter pair. The frame mixes electronics, mechanical structure, and aerodynamics: the entire craft is lifted and steered purely by varying the relative speed and torque of four fixed rotors, no swashplate or variable‑pitch blades required." },
+          { label:"Flight Control Logic", html:"Pilot input from the 6‑channel transmitter is processed by firmware written for an ATmega16 microcontroller, which translates stick movement into differential motor commands sent to each ESC. Takeoff, landing, and forward/backward/left/right motion are all achieved the same way: by changing the rotation rate of one or more rotors relative to the others, which shifts thrust distribution and tilts the frame in the desired direction. The ESCs sit between the microcontroller's logic-level signals and the physical motors, converting commands into the higher‑current switching needed to actually spin them." }
+        ],
+        limitations:[
+          "Manual RC control only, no onboard autonomous stabilization beyond the KK 2.1.5's built‑in leveling, and no GPS or telemetry feedback to the pilot."
+        ]
+      } },
+
+    { img:"project-11", cats:"perception",
+      title:"Operations on Signals Using MATLAB", org:"University of Mumbai",
+      status:"", statusClass:"",
+      teaser:"Core discrete-time signal operations implemented and visualized from scratch in MATLAB.",
+      desc:"Vectorized MATLAB implementations of core discrete‑time signal operations, including addition, subtraction, multiplication, time‑reversal, shifting, and even/odd decomposition, verified with stem‑plot visualizations.",
+      stack:"MATLAB · Vector/Matrix Manipulation · Stem Plotting",
+      results:[], tags:["Signal Processing","DSP Fundamentals"], links:[],
+      deepDive:{
+        team:"Team of 4: Aniket Apraj, Sahil Bhosale, Srushti Borikar, Anushka Chauhan",
+        gallery:[
+          {img:"project-11-oddeven", cap:"Even/odd decomposition of a discrete signal: the original, its even component, and its odd component plotted with stem plots."}
+        ],
+        sections:[
+          { label:"Operations Implemented", html:"Each operation was implemented directly on index vectors rather than relying on built‑in signal‑processing shortcuts, to make the underlying mechanics explicit. Addition and subtraction first computed the union of two signals' index ranges, zero‑padded each signal to that shared range, then combined them sample‑by‑sample. Multiplication followed the same alignment approach before an element‑wise product. Reversal flipped a signal's index vector around the origin, and shifting simply offset it. Even/odd decomposition combined a signal with its time‑reversed self, x(n)+x(‑n) for the even part and x(n)‑x(‑n) for the odd part, each scaled by one half. Every result was verified visually with MATLAB stem plots, which make discrete‑time behavior, including the effects of index misalignment, immediately visible." }
+        ]
+      } },
+
+    { img:"project-12", cats:"embedded",
+      title:"Sound‑Activated Home Automation Clap Switch", org:"University of Mumbai",
+      status:"", statusClass:"",
+      teaser:"A clap-activated circuit that toggles lights or appliances on and off, from breadboard to soldered PCB.",
+      desc:"A low‑cost clap‑detection circuit, microphone into an IC 741 amplifier into a CD4017 decade counter, that toggles LEDs or appliances on/off, taken from breadboard prototype to a soldered PCB.",
+      stack:"IC 741 · CD4017 · BC547 · Analog Electronics",
+      results:[], tags:["Analog Electronics","PCB Prototyping"], links:[],
+      deepDive:{
+        team:"Team of 4: Tejeshree Raju Bhoir, Srushti Sharad Borikar, Komal Avinash Chaudhari, Anushka Pradeep Chauhan",
+        sections:[
+          { label:"Circuit Operation", html:"A condenser microphone converts the sound of a clap into a small electrical signal, which is fed into the inverting input of an IC 741 op‑amp for amplification. The amplified pulse drives a BC547 transistor, which supplies a clock pulse to pin 14 of a CD4017 decade counter. Each clap advances the counter by one step: the first clap brings its Q1 output high, lighting LED1 and energizing a connected relay; the second clap advances the counter to Q2, turning LED1 off and LED2 on, and so on, giving simple alternating on/off control from repeated claps alone." },
+          { label:"Why This Circuit", html:"The team's own problem statement framed this explicitly as a low‑cost accessibility tool, noting it as useful \"for people who cannot move their legs,\" alongside the more general home‑automation pitch of controlling appliances without getting up or reaching a switch. It's a small circuit, but the instinct to point it at accessibility shows up here even in a second‑year mini project, years before the assistive‑robotics work later in this portfolio." },
+          { label:"Build Process", html:"The circuit was first assembled and verified on a breadboard using components sourced locally (IC 741, CD4017, BC547, resistors, LEDs, a variable resistor, and a condenser microphone), simulated in Multisim before physical assembly. Once the breadboard version worked reliably, the team soldered the same circuit onto a PCB and connected it to a battery for a permanent, working build." }
+        ]
+      } },
+
+    { img:"project-13", cats:"controls",
+      title:"Modeling &amp; Gait Control of a Three‑Link Bipedal Robot", org:"EECE 7398, Legged Robots, Northeastern University",
+      status:"", statusClass:"",
+      teaser:"A planar bipedal robot modeled and controlled from scratch using Hybrid Zero Dynamics, including an honest diagnosis of exactly where the optimizer fell short.",
+      desc:"Derived the full nonlinear dynamics of a 3‑link biped via Euler‑Lagrange, designed Bezier‑parameterized virtual constraints optimized in MATLAB, and implemented a feedback‑linearizing controller to drive the system onto the zero dynamics manifold, then root‑caused why the optimized gait didn't fully converge to a periodic orbit.",
+      stack:"MATLAB · fmincon · Feedback Linearization · Euler‑Lagrange Dynamics · Hybrid Zero Dynamics",
+      results:[["3‑DOF","full nonlinear biped model"],["10 steps","sustained forward locomotion"],["Kp=100","feedback‑linearizing PD gain"],["Root‑caused","gait non‑periodicity"]],
+      tags:["Legged Robots","Nonlinear Control","Optimization"], links:[],
+      deepDive:{
+        team:"Team of 4: Athmavidya Venkataraman, Guru Vignesh Madhavan, Anushka Pradeep Chauhan, Amir Shahzad · guided by Prof. Alireza Ramezani",
+        gallery:[
+          {img:"project-13-joints", cap:"Joint angles and velocities over 10 simulated steps: actuated joints q2/q3 track their Bezier references while the unactuated stance leg q1 evolves freely."},
+          {img:"project-13-phase", cap:"Full dynamics phase portrait (q1 vs. q̇1): loops drift rather than closing into one curve, the visual signature of an unmet periodicity constraint."}
+        ],
+        sections:[
+          { label:"Dynamic Modeling", html:"The biped is modeled as a 3‑link kinematic chain with four point masses (stance leg, swing leg, hip, torso) and three generalized coordinates: stance leg angle, swing leg angle, and torso angle, of which only two are actuated. Equations of motion were derived via the Euler‑Lagrange formalism into standard inertia‑Coriolis‑gravity form, D(q)q̈ + C(q,q̇)q̇ + G(q) = Bu, then cast into a 6‑state control‑affine state‑space model. A separate instantaneous rigid‑body impact map handles the discontinuity at each foot strike, redistributing joint velocities while keeping positions continuous, and a relabeling matrix swaps stance/swing roles after each step." },
+          { label:"Gait Design via Hybrid Zero Dynamics", html:"Rather than fighting the robot's natural dynamics the way Zero Moment Point control does, Hybrid Zero Dynamics (HZD) imposes virtual holonomic constraints that lock the two actuated joints onto prescribed trajectories, parameterized as 4th‑order Bezier polynomials, chosen for their smoothness and direct boundary‑value control. This reduces the full 6‑state hybrid system down to a 1‑DOF zero‑dynamics subsystem governing just the unactuated stance leg. The 8 free Bezier coefficients were optimized in MATLAB via fmincon to minimize total control effort subject to a periodicity constraint, and a feedback‑linearizing controller with PD gains (Kp=100, Kd=10) was implemented to drive the full‑order system onto that zero‑dynamics manifold in real time." },
+          { label:"What Actually Happened", html:"The optimizer converged, but to an infeasible point: it satisfied its step‑size tolerance before fully satisfying the periodicity constraint, meaning the robot's state at the end of a step didn't exactly match its state at the start. That residual error compounds at every foot strike, visible in the phase portrait as loops that drift progressively outward across 10 steps instead of tracing one repeating closed curve. Despite that, the closed‑loop controller still worked: the biped sustained forward locomotion for all 10 simulated steps without falling, and the actuated joints tracked their Bezier references closely throughout, demonstrating that the feedback‑linearizing controller does its job correctly even when the underlying reference gait isn't perfectly periodic." }
+        ],
+        limitations:[
+          "The gait did not converge to a true periodic orbit; root cause was the optimizer satisfying its step‑size tolerance before the periodicity constraint tolerance, not an error in the dynamics or controller.",
+          "Identified remedies: tighten fmincon's constraint tolerance, enable its interior‑point feasibility‑restoration mode, or refine the initial guess to start closer to a genuinely periodic solution."
+        ]
+      } },
+  ];
+
+  const statusLabel = { "": "", "ongoing":"ongoing", "pub":"pub" };
+
+  function fallbackIconSVG(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+  }
+
+  function cardHTML(p, i){
+    const statusHTML = p.status ? `<span class="card-status ${p.statusClass}">${p.status}</span>` : "";
+    const isSig = p.cats.includes("signature");
+    const sigBadge = isSig ? `<span class="sig-badge">★ Signature Work</span>` : "";
+    return `
+      <article class="card ${isSig ? 'is-signature' : ''}" data-cats="${p.cats}">
+        <div class="card-media">
+          <img src="./assets/${p.img}.jpg" alt="${p.title.replace(/&amp;/g,'&')}" loading="lazy"
+               onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+          <div class="media-fallback">${fallbackIconSVG()}</div>
+          ${sigBadge}
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <h3 class="card-title">${p.title}</h3>
+              <p class="card-sub">${p.org}</p>
+            </div>
+            ${statusHTML}
+          </div>
+          <p class="card-teaser">${p.teaser}</p>
+          <div class="card-tags">${p.tags.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+          <button class="learn-more" data-idx="${i}" type="button">Learn more →</button>
+        </div>
+      </article>`;
+  }
+
+  const listEl = document.getElementById("project-list");
+  listEl.innerHTML = PROJECTS.map(cardHTML).join("");
+
+  // ---------- Modal ----------
+  const modal = document.getElementById("project-modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalMedia = document.querySelector(".modal-media");
+
+  function deepDiveHTML(d){
+    if(!d) return "";
+    const context = `<div class="dd-context">${d.course ? `<span>${d.course}</span>`:""}${d.team ? `<span>${d.team}</span>`:""}</div>`;
+    const gallery = d.gallery ? `<div class="dd-gallery">${d.gallery.map(g=>`
+      <figure>
+        <img src="./assets/${g.img}.jpg" alt="" loading="lazy" onerror="this.closest('figure').style.display='none';">
+        <figcaption>${g.cap}</figcaption>
+      </figure>`).join("")}</div>` : "";
+    const arch = d.architectureImg ? `
+      <div class="dd-section">
+        <div class="dd-label">System Architecture</div>
+        <div class="dd-arch"><img src="./assets/${d.architectureImg}.jpg" alt="System architecture flowchart" loading="lazy" onerror="this.parentElement.style.display='none';"></div>
+      </div>` : "";
+    const sections = (d.sections||[]).map(s=>`
+      <div class="dd-section">
+        <div class="dd-label">${s.label}</div>
+        <p class="dd-text">${s.html}</p>
+      </div>`).join("");
+    const challenges = d.challenges ? `
+      <div class="dd-section">
+        <div class="dd-label">Challenges I Solved</div>
+        <ul class="dd-list dd-list-check">${d.challenges.map(c=>`<li>${c}</li>`).join("")}</ul>
+      </div>` : "";
+    const limitations = d.limitations ? `
+      <div class="dd-section">
+        <div class="dd-label">Limitations &amp; Future Work</div>
+        <ul class="dd-list dd-list-arrow">${d.limitations.map(c=>`<li>${c}</li>`).join("")}</ul>
+      </div>` : "";
+    return context + gallery + arch + sections + challenges + limitations;
+  }
+
+  function openModal(i){
+    const p = PROJECTS[i];
+    modalMedia.classList.remove("img-missing");
+    modalImg.src = `./assets/${p.img}.jpg`;
+    modalImg.onerror = () => modalMedia.classList.add("img-missing");
+    document.getElementById("modal-title").innerHTML = p.title;
+    document.getElementById("modal-sub").textContent = p.org;
+    document.getElementById("modal-status").outerHTML = p.status ? `<span class="card-status ${p.statusClass}" id="modal-status">${p.status}</span>` : '<span id="modal-status"></span>';
+    document.getElementById("modal-desc").innerHTML = p.desc;
+    document.getElementById("modal-stack").innerHTML = "<b>Stack:</b> " + p.stack;
+    document.getElementById("modal-results").innerHTML = p.results.map(r=>`<div class="result"><span class="num">${r[0]}</span><span class="lbl">${r[1]}</span></div>`).join("");
+    document.getElementById("modal-tags").innerHTML = p.tags.map(t=>`<span class="pill">${t}</span>`).join("");
+    document.getElementById("modal-links").innerHTML = p.links.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener">${l[0]}</a>`).join("");
+    document.getElementById("modal-deepdive").innerHTML = deepDiveHTML(p.deepDive);
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-lock");
+    modal.querySelector(".modal-box").scrollTop = 0;
+  }
+  function closeModal(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-lock");
+  }
+  listEl.addEventListener("click", (e)=>{
+    const btn = e.target.closest(".learn-more");
+    if(btn) openModal(Number(btn.dataset.idx));
+  });
+  modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+  document.querySelector(".modal-close").addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
+
   // Scroll reveal
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -940,13 +1342,12 @@
 
   // Project category filter
   const buttons = document.querySelectorAll('.tag');
-  const cards = document.querySelectorAll('#project-list .card');
   buttons.forEach(btn=>{
     btn.addEventListener('click', ()=>{
       buttons.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
-      cards.forEach(c=>{
+      document.querySelectorAll('#project-list .card').forEach(c=>{
         const cats = c.dataset.cats || '';
         c.style.display = (f==='all' || cats.includes(f)) ? '' : 'none';
       });
