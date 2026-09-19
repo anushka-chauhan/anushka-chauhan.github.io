@@ -93,6 +93,7 @@
       linear-gradient(150deg, #12142B 0%, #1B1F45 40%, #241E4E 75%, #2A2050 100%);
     color:var(--paper);
     padding-top:22px;
+    padding-bottom:40px;
     overflow:hidden;
     box-shadow:var(--shadow-lg);
   }
@@ -203,8 +204,7 @@
 
   .filmstrip{
     display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
-    margin-bottom:-46px; position:relative; z-index:3;
-    transform:translateY(30px);
+    margin-top:36px; position:relative; z-index:3;
   }
   @media (max-width:750px){ .filmstrip{ grid-template-columns:repeat(2,1fr); } }
   .film-frame{
@@ -606,7 +606,7 @@
 <main>
 
   <!-- 01 ABOUT -->
-  <section id="about" style="padding-top:100px;">
+  <section id="about">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-num">§01</span>
